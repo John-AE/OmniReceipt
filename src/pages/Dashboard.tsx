@@ -267,12 +267,6 @@ const Dashboard = () => {
                 <Plus className="mr-2 h-4 w-4" />
                 <span className="text-sm sm:text-base">Create Receipt</span>
               </Button>
-              <Button
-                className="w-full sm:w-auto bg-[#00A5CF] text-white hover:bg-[#0090B8] font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-                onClick={() => window.open('https://taxestimator.OmniReceipts.com.ng', '_blank')}
-              >
-                <span className="text-xs sm:text-base leading-tight">Personal Tax Estimator</span>
-              </Button>
             </div>
           </div>
 

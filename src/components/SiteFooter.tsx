@@ -23,12 +23,10 @@ const SiteFooter = () => {
                         <h4 className="font-bold mb-4">Quick Links</h4>
                         <ul className="space-y-2">
                             <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Home</Link></li>
-                            <li><Link to="/phone-receipt-nigeria" className="text-muted-foreground hover:text-primary transition-colors">Receipts</Link></li>
                             <li><Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">FAQs</Link></li>
                             <li><Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms & Conditions</Link></li>
                             <li><Link to="/auth" className="text-muted-foreground hover:text-primary transition-colors">Sign In / Register</Link></li>
                             <li><Link to="/dashboard" className="text-muted-foreground hover:text-primary transition-colors">Dashboard</Link></li>
-                            <li><a href="https://taxestimator.OmniReceipts.com.ng" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">Tax Estimator</a></li>
                         </ul>
                     </div>
 
