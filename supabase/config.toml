@@ -1,0 +1,25 @@
+project_id = "rwtdgknbahnvjkydzjzp"
+
+[functions.send-email-confirmation]
+verify_jwt = false
+
+[functions.send-password-reset]
+verify_jwt = false
+
+[functions.initialize-payment]
+verify_jwt = true
+
+[functions.verify-payment]
+verify_jwt = true
+
+[functions.paystack-webhook]
+verify_jwt = false
+
+[functions.check-subscriptions]
+verify_jwt = false
+
+[functions.send-welcome-email]
+verify_jwt = false
+
+[functions.send-document-email]
+verify_jwt = true
