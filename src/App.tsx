@@ -17,7 +17,6 @@ import NotFound from "./pages/NotFound";
 import PaymentCallback from "./pages/PaymentCallback";
 import ResetPassword from "./pages/ResetPassword";
 import TermsAndConditions from "./pages/TermsAndConditions";
-import PhoneReceiptNigeria from "./pages/PhoneReceiptNigeria";
 import PriceListPreview from "./pages/PriceListPreview";
 import PriceListManagement from "./pages/PriceListManagement";
 import PriceListView from "./pages/PriceListView";
@@ -50,7 +49,6 @@ const App = () => (
               <Route path="/payment-callback" element={<PaymentCallback />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/terms" element={<TermsAndConditions />} />
-              <Route path="/phone-receipt-nigeria" element={<PhoneReceiptNigeria />} />
               <Route path="/pricelist-preview" element={<PriceListPreview />} />
               <Route path="/price-list" element={<PriceListManagement />} />
               <Route path="/pricelist/:slug" element={<PriceListView />} />

@@ -44,7 +44,6 @@ const SiteHeader = () => {
                         >
                             FAQs
                         </button>
-                        <Link to="/phone-receipt-nigeria" className="text-foreground hover:text-primary transition-colors font-medium">Receipts</Link>
                         <Link to="/auth" className="text-foreground hover:text-primary transition-colors font-medium">Sign In</Link>
                         <a
                             href="mailto:admin@OmniReceipts.com.ng"
@@ -88,7 +87,6 @@ const SiteHeader = () => {
                             >
                                 FAQs
                             </button>
-                            <Link to="/phone-receipt-nigeria" className="block px-3 py-2 text-foreground hover:text-primary hover:bg-muted transition-colors font-medium rounded-md">Receipts</Link>
                             <Link to="/auth" className="block px-3 py-2 text-foreground hover:text-primary hover:bg-muted transition-colors font-medium rounded-md">Sign In</Link>
                             <a
                                 href="mailto:admin@OmniReceipts.com.ng"
