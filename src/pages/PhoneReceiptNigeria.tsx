@@ -193,4 +193,4 @@ const DeviceReceipts = () => {
   );
 };
 
-export { DeviceReceipts as PhoneReceiptNigeria };
+export default DeviceReceipts;
