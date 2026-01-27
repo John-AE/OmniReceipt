@@ -2,52 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-/* OmniReceipts Design System - Brand colors 
+/* OmniReceipts Design System - American-inspired colors 
 All colors MUST be HSL.
  */
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 160 10% 15%;
+    --foreground: 220 90% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 160 10% 15%;
+    --card-foreground: 220 90% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 160 10% 15%;
+    --popover-foreground: 220 90% 15%;
 
-    /* Green primary theme */
-    --primary: 145 85% 25%;
-    --primary-foreground: 0 0% 98%;
+    /* American Red primary theme */
+    --primary: 350 85% 40%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Lighter green for secondary */
-    --secondary: 145 60% 92%;
-    --secondary-foreground: 145 85% 25%;
+    /* Lighter red for secondary */
+    --secondary: 350 60% 95%;
+    --secondary-foreground: 350 85% 40%;
 
-    --muted: 145 30% 95%;
-    --muted-foreground: 160 5% 45%;
+    --muted: 220 20% 97%;
+    --muted-foreground: 220 10% 45%;
 
-    /* Gold accent for premium feel */
-    --accent: 45 95% 50%;
-    --accent-foreground: 160 10% 15%;
+    /* American Blue accent for premium feel */
+    --accent: 215 85% 35%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 145 20% 90%;
-    --input: 145 20% 95%;
-    --ring: 145 85% 25%;
+    --border: 220 20% 88%;
+    --input: 220 20% 95%;
+    --ring: 350 85% 40%;
 
     /* Success state for receipts */
-    --success: 145 85% 25%;
+    --success: 145 85% 35%;
     --success-foreground: 0 0% 98%;
 
     /* OmniReceipts brand gradients */
     --gradient-primary: linear-gradient(
       135deg,
       hsl(var(--primary)),
-      hsl(145 80% 35%)
+      hsl(350 80% 45%)
     );
     --gradient-success: linear-gradient(
       135deg,
@@ -59,82 +59,82 @@ All colors MUST be HSL.
 
     --sidebar-background: 0 0% 98%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-foreground: 220 90% 15%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary: 215 85% 35%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 100%;
 
-    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent: 215 85% 95%;
 
-    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-accent-foreground: 215 85% 35%;
 
-    --sidebar-border: 220 13% 91%;
+    --sidebar-border: 220 20% 88%;
 
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 215 85% 50%;
   }
 
   .dark {
-    --background: 160 20% 8%;
-    --foreground: 0 0% 95%;
+    --background: 220 40% 10%;
+    --foreground: 0 0% 98%;
 
-    --card: 160 15% 12%;
-    --card-foreground: 0 0% 95%;
+    --card: 220 35% 12%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 160 15% 12%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 220 35% 12%;
+    --popover-foreground: 0 0% 98%;
 
-    /* Brighter green for dark mode */
-    --primary: 145 85% 45%;
-    --primary-foreground: 160 20% 8%;
+    /* Brighter red for dark mode */
+    --primary: 350 85% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 160 15% 20%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 220 35% 20%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 160 15% 20%;
-    --muted-foreground: 160 5% 65%;
+    --muted: 220 35% 20%;
+    --muted-foreground: 220 10% 65%;
 
-    /* Gold accent maintains visibility in dark mode */
-    --accent: 45 95% 60%;
-    --accent-foreground: 160 20% 8%;
+    /* Blue accent maintains visibility in dark mode */
+    --accent: 215 85% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 160 15% 20%;
-    --input: 160 15% 20%;
-    --ring: 145 85% 45%;
+    --border: 220 35% 20%;
+    --input: 220 35% 20%;
+    --ring: 350 85% 50%;
 
     --success: 145 85% 45%;
-    --success-foreground: 160 20% 8%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --success-foreground: 220 40% 10%;
+    --sidebar-background: 220 40% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 215 85% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 215 85% 20%;
+    --sidebar-accent-foreground: 215 85% 60%;
+    --sidebar-border: 220 35% 20%;
+    --sidebar-ring: 215 85% 60%;
   }
 }
 
 @keyframes ripple {
   0% {
     box-shadow:
-      0 0 0 0 rgba(13, 148, 136, 0.4),
-      0 0 0 0 rgba(13, 148, 136, 0.4);
+      0 0 0 0 rgba(179, 25, 66, 0.4),
+      0 0 0 0 rgba(179, 25, 66, 0.4);
   }
 
   80% {
     box-shadow:
-      0 0 0 20px rgba(13, 148, 136, 0),
-      0 0 0 40px rgba(13, 148, 136, 0);
+      0 0 0 20px rgba(179, 25, 66, 0),
+      0 0 0 40px rgba(179, 25, 66, 0);
   }
 
   100% {
     box-shadow:
-      0 0 0 0 rgba(13, 148, 136, 0),
-      0 0 0 0 rgba(13, 148, 136, 0);
+      0 0 0 0 rgba(179, 25, 66, 0),
+      0 0 0 0 rgba(179, 25, 66, 0);
   }
 }
 

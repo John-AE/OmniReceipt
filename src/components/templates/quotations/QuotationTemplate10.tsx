@@ -8,7 +8,7 @@ interface QuotationTemplate10Props {
 }
 
 const QuotationTemplate10: React.FC<QuotationTemplate10Props> = ({ data }) => {
-  const primaryColor = data.primaryColor || "#00A676"; // Default green for Quotation Template 10
+  const primaryColor = data.primaryColor || "#B31942"; // Default American Red for Quotation Template 10
   const taxAmount = (data.subTotal * (data.taxRate || 0)) / 100;
 
   return (

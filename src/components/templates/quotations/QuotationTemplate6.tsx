@@ -7,7 +7,7 @@ interface QuotationTemplate6Props {
 }
 
 const QuotationTemplate6: React.FC<QuotationTemplate6Props> = ({ data }) => {
-  const primaryColor = data.primaryColor || "#2A324B"; // Default dark blue for Quotation Template 6
+  const primaryColor = data.primaryColor || "#0A3161"; // Default American Blue for Quotation Template 6
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">

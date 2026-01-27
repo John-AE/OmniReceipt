@@ -7,7 +7,7 @@ interface QuotationTemplate5Props {
 }
 
 const QuotationTemplate5: React.FC<QuotationTemplate5Props> = ({ data }) => {
-  const primaryColor = data.primaryColor || "#FF7F11"; // Default orange for Quotation Template 5
+  const primaryColor = data.primaryColor || "#B31942"; // Default American Red for Quotation Template 5
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">

@@ -12,7 +12,7 @@ const Template3: React.FC<Template3Props> = ({ data }) => {
   const displayTotal = hasPartialPayments
     ? (data.remainingBalance ?? data.totalAmount)
     : data.totalAmount;
-  const primaryColor = data.primaryColor || "#16a34a"; // Default green-600 for Template 3
+  const primaryColor = data.primaryColor || "#B31942"; // Default American Red for Template 3
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">
@@ -192,7 +192,7 @@ const Template3: React.FC<Template3Props> = ({ data }) => {
                       )}
                     </span>
                   </div>
-                  <div className="flex justify-between mb-3 text-green-600">
+                  <div className="flex justify-between mb-3 text-red-600">
                     <span>Amount Paid:</span>
                     <span>
                       -
@@ -203,7 +203,7 @@ const Template3: React.FC<Template3Props> = ({ data }) => {
                       )}
                     </span>
                   </div>
-                  <div className="flex justify-between text-xl font-bold text-green-800 border-t pt-3">
+                  <div className="flex justify-between text-xl font-bold text-red-800 border-t pt-3">
                     <span>Balance Due:</span>
                     <span>
                       {formatCurrency(displayTotal, data.currency, data.locale)}
@@ -211,7 +211,7 @@ const Template3: React.FC<Template3Props> = ({ data }) => {
                   </div>
                 </>
               ) : (
-                <div className="flex justify-between text-xl font-bold text-green-800">
+                <div className="flex justify-between text-xl font-bold text-red-800">
                   <span>Total:</span>
                   <span>
                     {formatCurrency(
@@ -222,7 +222,7 @@ const Template3: React.FC<Template3Props> = ({ data }) => {
                   </span>
                 </div>
               )}
-              <div className="mt-3 pt-3 border-t border-green-300">
+              <div className="mt-3 pt-3 border-t border-red-300">
                 <p className="text-sm text-gray-700 italic">
                   <span className="font-semibold">
                     {convertAmountToWords(displayTotal, data.currency)}
@@ -234,7 +234,7 @@ const Template3: React.FC<Template3Props> = ({ data }) => {
         </div>
 
         {/* Footer */}
-        <div className="mt-8 pt-6 border-t border-green-200 flex items-center justify-center gap-2 text-gray-600">
+        <div className="mt-8 pt-6 border-t border-red-200 flex items-center justify-center gap-2 text-gray-600">
           <img
             src="/lovable-uploads/bec25280-d488-4d12-99b7-c326f6694bf7.png"
             alt="OmniReceipts Logo"

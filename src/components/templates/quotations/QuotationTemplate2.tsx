@@ -7,7 +7,7 @@ interface QuotationTemplate2Props {
 }
 
 const QuotationTemplate2: React.FC<QuotationTemplate2Props> = ({ data }) => {
-  const primaryColor = data.primaryColor || "#1f2937"; // Default gray-800 for Quotation Template 2
+  const primaryColor = data.primaryColor || "#B31942"; // Default American Red for Quotation Template 2
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">

@@ -14,7 +14,7 @@ const Template7: React.FC<Template7Props> = ({ data }) => {
   const displayTotal = hasPartialPayments
     ? (data.remainingBalance ?? data.totalAmount)
     : data.totalAmount;
-  const primaryColor = data.primaryColor || "#3b82f6"; // Default blue-500 for Template 7
+  const primaryColor = data.primaryColor || "#0A3161"; // Default American Blue for Template 7
 
   return (
     <BaseTemplate>
@@ -46,7 +46,10 @@ const Template7: React.FC<Template7Props> = ({ data }) => {
             <p>Invoice #: {data.invoiceNumber}</p>
             <p>Invoice Date: {data.invoiceDate}</p>
             {data.paymentDate && <p>Due Date: {data.paymentDate}</p>}
-            <p>Due Amount: {formatCurrency(displayTotal, data.currency, data.locale)}</p>
+            <p>
+              Due Amount:{" "}
+              {formatCurrency(displayTotal, data.currency, data.locale)}
+            </p>
           </div>
         </div>
       </div>
@@ -133,7 +136,11 @@ const Template7: React.FC<Template7Props> = ({ data }) => {
                   className="p-2 flex-1 basis-0 text-right font-semibold"
                   style={{ color: primaryColor }}
                 >
-                  ({formatCurrency(Math.abs(item.totalPrice, data.currency, data.locale))})
+                  (
+                  {formatCurrency(
+                    Math.abs(item.totalPrice, data.currency, data.locale),
+                  )}
+                  )
                 </div>
               </div>
             ))}
@@ -148,33 +155,52 @@ const Template7: React.FC<Template7Props> = ({ data }) => {
           <div className="w-1/3">
             <div className="flex justify-between mb-2 p-2">
               <span className="text-gray-600">Sub Total:</span>
-              <span>{formatCurrency(data.subTotal, data.currency, data.locale)}</span>
+              <span>
+                {formatCurrency(data.subTotal, data.currency, data.locale)}
+              </span>
             </div>
             {data.taxRate > 0 && (
               <div className="flex justify-between mb-2 p-2">
                 <span className="text-gray-600">Tax ({data.taxRate}%):</span>
-                <span>{formatCurrency(taxAmount, data.currency, data.locale)}</span>
+                <span>
+                  {formatCurrency(taxAmount, data.currency, data.locale)}
+                </span>
               </div>
             )}
             {hasPartialPayments && (
               <>
                 <div className="flex justify-between mb-2 p-2 border-t">
                   <span className="text-gray-600">Original Total:</span>
-                  <span>{formatCurrency(data.totalAmount, data.currency, data.locale)}</span>
+                  <span>
+                    {formatCurrency(
+                      data.totalAmount,
+                      data.currency,
+                      data.locale,
+                    )}
+                  </span>
                 </div>
                 <div
                   className="flex justify-between mb-2 p-2 font-medium"
                   style={{ color: primaryColor }}
                 >
                   <span>Amount Paid:</span>
-                  <span>-{formatCurrency(data.amountPaid!, data.currency, data.locale)}</span>
+                  <span>
+                    -
+                    {formatCurrency(
+                      data.amountPaid!,
+                      data.currency,
+                      data.locale,
+                    )}
+                  </span>
                 </div>
                 <div
                   className="flex justify-between font-bold text-white p-2 mt-4"
                   style={{ backgroundColor: primaryColor }}
                 >
                   <span className="text-left font-bold">Balance Due</span>
-                  <span>{formatCurrency(displayTotal, data.currency, data.locale)}</span>
+                  <span>
+                    {formatCurrency(displayTotal, data.currency, data.locale)}
+                  </span>
                 </div>
               </>
             )}
@@ -184,7 +210,9 @@ const Template7: React.FC<Template7Props> = ({ data }) => {
                 style={{ backgroundColor: primaryColor }}
               >
                 <span className="text-left font-bold">Total</span>
-                <span>{formatCurrency(data.totalAmount, data.currency, data.locale)}</span>
+                <span>
+                  {formatCurrency(data.totalAmount, data.currency, data.locale)}
+                </span>
               </div>
             )}
             <div className="mt-3 p-2">

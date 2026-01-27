@@ -369,7 +369,7 @@ const Index = () => {
                     <span className="text-muted-foreground ml-1">{plan.period}</span>
                   </div>
                   {plan.savings && (
-                    <div className="text-sm text-green-600 font-medium">{plan.savings}</div>
+                    <div className="text-sm text-primary font-medium">{plan.savings}</div>
                   )}
                   <CardDescription>{plan.description}</CardDescription>
                 </CardHeader>
@@ -378,7 +378,7 @@ const Index = () => {
                   <ul className="space-y-3 mb-6">
                     {plan.features.map((feature, index) => (
                       <li key={index} className="flex items-center gap-2">
-                        <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
+                        <Check className="h-4 w-4 text-primary flex-shrink-0" />
                         <span className="text-sm">{feature}</span>
                       </li>
                     ))}
@@ -422,11 +422,8 @@ const Index = () => {
             <p>
               OmniReceipts is the leading invoice and receipt generator built for businesses worldwide.
               Whether you're an artisan, freelancer, or small business owner, our platform helps you create
-              professional documents in seconds. With the{' '}
-              <a href="https://www.firs.gov.ng" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                Federal Inland Revenue Service (FIRS)
-              </a>{' '}
-              pushing for digital compliance, having proper documentation is more important than ever.
+              professional documents in seconds. With tax authorities worldwide pushing for digital compliance,
+              having proper documentation is more important than ever.
             </p>
             <p>
               Our app integrates with WhatsApp for instant sharing, supports multiple professional templates,

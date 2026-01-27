@@ -12,7 +12,7 @@ const Template6: React.FC<Template6Props> = ({ data }) => {
   const displayTotal = hasPartialPayments
     ? (data.remainingBalance ?? data.totalAmount)
     : data.totalAmount;
-  const primaryColor = data.primaryColor || "#2A324B"; // Default dark blue for Template 6
+  const primaryColor = data.primaryColor || "#0A3161"; // Default American Blue for Template 6
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">
@@ -146,14 +146,14 @@ const Template6: React.FC<Template6Props> = ({ data }) => {
                 {data.items
                   .filter((item) => item.isPayment)
                   .map((item, index) => (
-                    <tr key={`payment-${index}`} className="bg-green-50">
+                    <tr key={`payment-${index}`} className="bg-red-50">
                       <td
-                        className="p-4 border-b border-gray-200 text-green-700 italic"
+                        className="p-4 border-b border-gray-200 text-red-700 italic"
                         colSpan={3}
                       >
                         {item.description}
                       </td>
-                      <td className="p-4 border-b border-gray-200 text-right text-green-700 font-semibold">
+                      <td className="p-4 border-b border-gray-200 text-right text-red-700 font-semibold">
                         ({Math.abs(item.totalPrice).toLocaleString()})
                       </td>
                     </tr>
@@ -209,10 +209,10 @@ const Template6: React.FC<Template6Props> = ({ data }) => {
                         </td>
                       </tr>
                       <tr>
-                        <td className="py-2 text-right text-green-600">
+                        <td className="py-2 text-right text-red-600">
                           Amount Paid:
                         </td>
-                        <td className="py-2 text-right font-medium text-green-600">
+                        <td className="py-2 text-right font-medium text-red-600">
                           -
                           {formatCurrency(
                             data.amountPaid || 0,

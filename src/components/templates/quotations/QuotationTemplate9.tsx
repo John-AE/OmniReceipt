@@ -8,7 +8,7 @@ interface QuotationTemplate9Props {
 }
 
 const QuotationTemplate9: React.FC<QuotationTemplate9Props> = ({ data }) => {
-  const primaryColor = data.primaryColor || "#dc2626"; // Default red-600 for Quotation Template 9
+  const primaryColor = data.primaryColor || "#B31942"; // Default American Red for Quotation Template 9
   const taxAmount = (data.subTotal * (data.taxRate || 0)) / 100;
 
   return (

@@ -12,7 +12,7 @@ const Template10: React.FC<Template10Props> = ({ data }) => {
   const displayTotal = hasPartialPayments
     ? (data.remainingBalance ?? data.totalAmount)
     : data.totalAmount;
-  const primaryColor = data.primaryColor || "#CA3CFF"; // Default bright purple for Template 10
+  const primaryColor = data.primaryColor || "#0A3161"; // Default American Blue for Template 10
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">

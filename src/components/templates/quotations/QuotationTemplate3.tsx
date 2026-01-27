@@ -7,7 +7,7 @@ interface QuotationTemplate3Props {
 }
 
 const QuotationTemplate3: React.FC<QuotationTemplate3Props> = ({ data }) => {
-  const primaryColor = data.primaryColor || "#22c55e"; // Default green-500 for Quotation Template 3
+  const primaryColor = data.primaryColor || "#B31942"; // Default American Red for Quotation Template 3
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">

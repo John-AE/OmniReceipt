@@ -7,7 +7,7 @@ interface QuotationTemplate4Props {
 }
 
 const QuotationTemplate4: React.FC<QuotationTemplate4Props> = ({ data }) => {
-  const primaryColor = data.primaryColor || "#275950"; // Default dark green for Quotation Template 4
+  const primaryColor = data.primaryColor || "#0A3161"; // Default American Blue for Quotation Template 4
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">

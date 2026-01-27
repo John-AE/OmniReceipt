@@ -12,7 +12,7 @@ const Template2: React.FC<Template2Props> = ({ data }) => {
   const displayTotal = hasPartialPayments
     ? (data.remainingBalance ?? data.totalAmount)
     : data.totalAmount;
-  const primaryColor = data.primaryColor || "#1f2937"; // Default gray-800 for Template 2
+  const primaryColor = data.primaryColor || "#B31942"; // Default American Red for Template 2
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">
@@ -119,14 +119,14 @@ const Template2: React.FC<Template2Props> = ({ data }) => {
                 {data.items
                   .filter((item) => item.isPayment)
                   .map((item, index) => (
-                    <tr key={`payment-${index}`} className="bg-green-50">
+                    <tr key={`payment-${index}`} className="bg-red-50">
                       <td
-                        className="border border-gray-300 p-3 text-green-700 italic"
+                        className="border border-gray-300 p-3 text-red-700 italic"
                         colSpan={3}
                       >
                         {item.description}
                       </td>
-                      <td className="border border-gray-300 p-3 text-right text-green-700 font-semibold">
+                      <td className="border border-gray-300 p-3 text-right text-red-700 font-semibold">
                         ({Math.abs(item.totalPrice).toLocaleString()})
                       </td>
                     </tr>
@@ -169,7 +169,7 @@ const Template2: React.FC<Template2Props> = ({ data }) => {
                       )}
                     </span>
                   </div>
-                  <div className="flex justify-between mb-2 text-green-600">
+                  <div className="flex justify-between mb-2 text-red-600">
                     <span className="font-medium">Amount Paid:</span>
                     <span>
                       -

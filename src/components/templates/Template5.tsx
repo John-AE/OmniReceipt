@@ -12,7 +12,7 @@ const Template5: React.FC<Template5Props> = ({ data }) => {
   const displayTotal = hasPartialPayments
     ? (data.remainingBalance ?? data.totalAmount)
     : data.totalAmount;
-  const primaryColor = data.primaryColor || "#FF7F11"; // Default orange for Template 5
+  const primaryColor = data.primaryColor || "#B31942"; // Default American Red for Template 5
 
   return (
     <div className="w-[794px] mx-auto p-8 bg-white text-black">
