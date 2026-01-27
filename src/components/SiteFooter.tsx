@@ -15,7 +15,7 @@ const SiteFooter = () => {
                             <span className="text-xl font-poppins font-bold text-foreground">OmniReceipts</span>
                         </div>
                         <p className="text-muted-foreground mr-4">
-                            Fast professional invoices and receipts for Nigerian artisans, small businesses, and freelancers. Made in Nigeria, for Nigeria.
+                            Fast professional invoices and receipts for artisans, small businesses, and freelancers worldwide. Made for everyone, everywhere.
                         </p>
                     </div>
 

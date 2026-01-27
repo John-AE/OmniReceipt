@@ -274,7 +274,7 @@ const CreateInvoice = () => {
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5">
       <MetaSEO 
         title="Create Invoice" 
-        description="Create professional invoices for your Nigerian business. Add itemized details, apply tax, and share instantly via WhatsApp."
+        description="Create professional invoices for your business. Add itemized details, apply tax, and share instantly via WhatsApp."
         canonicalPath="/create-invoice"
       />
       {/* Header */}

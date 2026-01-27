@@ -206,7 +206,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTa
                                     <Input
                                         id="modal-business-address"
                                         type="text"
-                                        placeholder="Lagos, Nigeria"
+                                        placeholder="Your city, country"
                                         {...signUpForm.register('businessAddress', { required: 'Address is required' })}
                                         className="h-11"
                                     />

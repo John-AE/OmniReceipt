@@ -3,7 +3,7 @@
 > Fast professional invoices and receipts for artisans, small businesses, freelancers, and everyone!
 
 [![Live Demo](https://img.shields.io/badge/demo-live-success)](https://123185.xyz)
-[![Made in Nigeria](https://img.shields.io/badge/made%20in-Nigeria-green)](https://123185.xyz)
+[![Made with Love](https://img.shields.io/badge/made%20with-love-red)](https://123185.xyz)
 
 ## 📋 Table of Contents
 
@@ -18,7 +18,7 @@
 
 ## 🌟 Overview
 
-OmniReceipts is a mobile-first web application designed specifically for Nigerian artisans, craftsmen, and small business owners to create professional invoices and receipts in seconds. With seamless WhatsApp integration and beautiful templates, it transforms the way small businesses manage their documentation.
+OmniReceipts is a mobile-first web application designed specifically for artisans, craftsmen, and small business owners worldwide to create professional invoices and receipts in seconds. With seamless WhatsApp integration and beautiful templates, it transforms the way small businesses manage their documentation.
 
 **Live Application**: [https://123185.xyz](https://123185.xyz)
 
@@ -401,4 +401,4 @@ Copyright © 2025 OmniReceipts. All rights reserved.
 
 ---
 
-**Made in Nigeria 🇳🇬 for Nigerian Artisans and Small Businesses**
+**Made with Love ❤️ for Artisans and Small Businesses Worldwide**

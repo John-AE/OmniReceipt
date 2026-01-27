@@ -85,7 +85,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-primary/10 via-background to-accent/10">
       <MetaSEO
         title="Professional Invoices, Receipts & 2025 Tax Calculator"
-        description="Create professional invoices and receipts for free. Plus, calculate your 2025 Personal Income Tax (PIT) under the new Nigeria Tax Act."
+        description="Create professional invoices and receipts for free. Plus, calculate your 2025 Personal Income Tax (PIT) under the new Tax Act."
         canonicalPath="/"
       />
       <SiteHeader />
@@ -113,7 +113,7 @@ const Index = () => {
 
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl lg:max-w-none">
                 Create beautiful invoices and receipts in seconds. Share via WhatsApp instantly.
-                Perfect for Nigerian artisans, craftsmen, and small business owners.
+                Perfect for artisans, craftsmen, and small business owners worldwide.
               </p>
 
               {/* CTA Buttons */}
@@ -317,7 +317,7 @@ const Index = () => {
             Ready to professionalize your business?
           </h2>
           <p className="text-xl text-muted-foreground mb-8">
-            Join thousands of Nigerian artisans using OmniReceipts to grow their business
+            Join thousands of artisans using OmniReceipts to grow their business
           </p>
           <a
             href="https://www.OmniReceipts.com.ng/OmniReceipts.apk"
@@ -416,11 +416,11 @@ const Index = () => {
       <section className="py-16 bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-foreground mb-6">
-            Why Nigerian Businesses Choose OmniReceipts
+            Why Businesses Choose OmniReceipts
           </h2>
           <div className="prose prose-lg text-muted-foreground max-w-none space-y-4">
             <p>
-              OmniReceipts is the leading invoice and receipt generator built specifically for Nigerian businesses.
+              OmniReceipts is the leading invoice and receipt generator built for businesses worldwide.
               Whether you're an artisan, freelancer, or small business owner, our platform helps you create
               professional documents in seconds. With the{' '}
               <a href="https://www.firs.gov.ng" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
@@ -433,16 +433,16 @@ const Index = () => {
               and helps you track all your business transactions. Create your first{' '}
               <Link to="/create-invoice" className="text-primary hover:underline">invoice</Link> or{' '}
               <Link to="/dashboard" className="text-primary hover:underline">receipt</Link> today and join
-              thousands of Nigerian entrepreneurs already using OmniReceipts.
+              thousands of entrepreneurs already using OmniReceipts.
             </p>
             <p>
               Learn more about digital receipts and invoicing best practices from the{' '}
               <a href="https://www.pwc.com/ng" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                PwC Nigeria
+                PwC Global
               </a>{' '}
               or check the{' '}
-              <a href="https://nigerianstat.gov.ng" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                National Bureau of Statistics
+              <a href="https://unstats.un.org/ sdgs/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+                UN Statistics
               </a>{' '}
               for small business insights.
             </p>

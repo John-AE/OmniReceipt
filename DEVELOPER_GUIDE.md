@@ -20,6 +20,7 @@
 ### Technology Stack Details
 
 #### Frontend Layer
+
 ```
 React 18.3.1 + TypeScript
     ↓
@@ -35,6 +36,7 @@ Supabase Client (API Communication)
 ```
 
 #### Backend Layer (Supabase)
+
 ```
 PostgreSQL Database
     ↓
@@ -74,6 +76,7 @@ Auth Service
 ### Tables Overview
 
 #### 1. profiles
+
 Stores user profile and business information.
 
 ```sql
@@ -98,16 +101,19 @@ CREATE TABLE profiles (
 ```
 
 **Indexes:**
+
 - `user_id` (unique)
 - `email`
 - `phone`
 
 **RLS Policies:**
+
 - Users can view their own profile
 - Users can update their own profile
 - Admins can view all profiles (using security definer function)
 
 #### 2. invoices
+
 Stores invoice header information.
 
 ```sql
@@ -132,12 +138,14 @@ CREATE TABLE invoices (
 ```
 
 **Indexes:**
+
 - `user_id`
 - `customer_phone`
 - `invoice_date`
 - `created_at`
 
 **RLS Policies:**
+
 - Users can view their own invoices
 - Users can create invoices (with usage limit check)
 - Users can update their own invoices
@@ -145,6 +153,7 @@ CREATE TABLE invoices (
 - Admins can view all invoices
 
 #### 3. invoice_items
+
 Stores line items for invoices.
 
 ```sql
@@ -160,14 +169,17 @@ CREATE TABLE invoice_items (
 ```
 
 **Indexes:**
+
 - `invoice_id`
 
 **RLS Policies:**
+
 - Users can view items for their invoices
 - Users can create items for their invoices
 - Items cascade delete with invoice
 
 #### 4. receipts
+
 Stores receipt information (simplified from invoices).
 
 ```sql
@@ -189,6 +201,7 @@ CREATE TABLE receipts (
 **Similar structure to invoices but simpler for quick receipts.**
 
 #### 5. receipt_items
+
 Stores line items for receipts.
 
 ```sql
@@ -204,6 +217,7 @@ CREATE TABLE receipt_items (
 ```
 
 #### 6. customers
+
 Standalone customer database for easy management.
 
 ```sql
@@ -223,6 +237,7 @@ CREATE TABLE customers (
 ### Database Functions
 
 #### 1. increment_invoice_count()
+
 Increments the invoice counter when a user creates an invoice.
 
 ```sql
@@ -233,7 +248,7 @@ SECURITY DEFINER
 SET search_path TO 'public'
 AS $$
 BEGIN
-  UPDATE public.profiles 
+  UPDATE public.profiles
   SET invoice_count = invoice_count + 1
   WHERE user_id = user_uuid;
 END;
@@ -241,9 +256,11 @@ $$;
 ```
 
 #### 2. increment_receipt_count()
+
 Similar to invoice count, for receipts.
 
 #### 3. check_usage_limit()
+
 Checks if a user has reached their monthly limit.
 
 ```sql
@@ -256,28 +273,29 @@ AS $$
 DECLARE
   user_profile RECORD;
 BEGIN
-  SELECT * INTO user_profile 
-  FROM public.profiles 
+  SELECT * INTO user_profile
+  FROM public.profiles
   WHERE user_id = user_uuid;
-  
+
   -- If paid subscription, no limits
   IF user_profile.subscription_type != 'free' THEN
     RETURN true;
   END IF;
-  
+
   -- Check limits for free users (3 documents per month)
   IF item_type = 'invoice' THEN
     RETURN user_profile.invoice_count < 3;
   ELSIF item_type = 'receipt' THEN
     RETURN user_profile.receipt_count < 3;
   END IF;
-  
+
   RETURN false;
 END;
 $$;
 ```
 
 #### 4. is_admin()
+
 Checks if the current user is an admin. Uses email-based verification.
 
 ```sql
@@ -289,8 +307,8 @@ SET search_path TO 'public'
 AS $$
 BEGIN
   RETURN EXISTS (
-    SELECT 1 FROM public.profiles 
-    WHERE user_id = auth.uid() 
+    SELECT 1 FROM public.profiles
+    WHERE user_id = auth.uid()
     AND email = 'johnnybgsu@gmail.com'
   );
 END;
@@ -298,9 +316,11 @@ $$;
 ```
 
 #### 5. authenticate_with_phone_passcode()
+
 Allows phone-based authentication (not actively used, password auth preferred).
 
 #### 6. get_profile_by_phone()
+
 Retrieves profile by phone number with normalization.
 
 ```sql
@@ -332,7 +352,7 @@ BEGIN
     WHERE p.phone = without_cc
     LIMIT 1;
     IF FOUND THEN RETURN; END IF;
-    
+
     -- Try with leading 0
     RETURN QUERY
     SELECT p.email, p.phone
@@ -364,6 +384,7 @@ $$;
 ### Database Triggers
 
 #### update_updated_at_column()
+
 Automatically updates `updated_at` timestamp on record modification.
 
 ```sql
@@ -387,6 +408,7 @@ CREATE TRIGGER update_profiles_updated_at
 ```
 
 #### handle_new_user()
+
 Creates a profile record when a new user signs up.
 
 ```sql
@@ -418,9 +440,11 @@ CREATE TRIGGER on_auth_user_created
 ### Storage Buckets
 
 #### invoices (Public)
+
 Stores generated invoice and receipt JPEG images.
 
 **Policies:**
+
 ```sql
 -- Allow authenticated users to upload their own files
 CREATE POLICY "Users can upload their own invoices"
@@ -469,11 +493,17 @@ Located in `src/hooks/useAuth.tsx`, this custom hook provides:
 
 ```typescript
 interface AuthContextType {
-  user: User | null;              // Supabase user object
-  session: Session | null;        // Supabase session
-  loading: boolean;               // Auth state loading
-  profile: any;                   // User profile from DB
-  signUp: (email, password, artisanName, businessAddress, phone) => Promise<{ error: any }>;
+  user: User | null; // Supabase user object
+  session: Session | null; // Supabase session
+  loading: boolean; // Auth state loading
+  profile: any; // User profile from DB
+  signUp: (
+    email,
+    password,
+    artisanName,
+    businessAddress,
+    phone,
+  ) => Promise<{ error: any }>;
   signIn: (email, password) => Promise<{ error: any }>;
   signInWithPhone: (phone, password) => Promise<{ error: any }>;
   resetPassword: (email) => Promise<{ error: any }>;
@@ -497,11 +527,11 @@ const signUp = async (email, password, artisanName, businessAddress, phone) => {
       data: {
         artisan_name: artisanName,
         business_address: businessAddress,
-        phone: phone.replace(/\s+/g, ''),
-      }
-    }
+        phone: phone.replace(/\s+/g, ""),
+      },
+    },
   });
-  
+
   // Profile is automatically created by database trigger
   return { error };
 };
@@ -524,22 +554,24 @@ const signIn = async (email, password) => {
 ```typescript
 const signInWithPhone = async (phone, password) => {
   // Normalize phone number
-  const normalizedPhone = phone.replace(/\s+/g, '');
-  
+  const normalizedPhone = phone.replace(/\s+/g, "");
+
   // Use secure RPC to find email by phone
-  const { data: profileData, error: profileError } = await supabase
-    .rpc('get_profile_by_phone', { phone_number: normalizedPhone });
-  
+  const { data: profileData, error: profileError } = await supabase.rpc(
+    "get_profile_by_phone",
+    { phone_number: normalizedPhone },
+  );
+
   if (!profileData || profileData.length === 0) {
     return { error: new Error("Phone number not found") };
   }
-  
+
   // Sign in with email and password
   const { error } = await supabase.auth.signInWithPassword({
     email: profileData[0].email,
     password,
   });
-  
+
   return { error };
 };
 ```
@@ -562,15 +594,15 @@ In `src/App.tsx`, routes are protected using the `useAuth` hook:
 ```typescript
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
-  
+
   if (loading) {
     return <div>Loading...</div>;
   }
-  
+
   if (!user) {
     return <Navigate to="/auth" replace />;
   }
-  
+
   return <>{children}</>;
 }
 ```
@@ -623,6 +655,7 @@ App
 **Purpose:** Main user dashboard showing statistics and recent activity.
 
 **Features:**
+
 - Total and monthly invoice/receipt counts
 - Revenue tracking (all-time and monthly)
 - Usage limit display with progress bar
@@ -631,13 +664,14 @@ App
 - Paywall modal for free tier limits
 
 **State Management:**
+
 ```typescript
 const [stats, setStats] = useState({
   totalInvoices: 0,
   totalReceipts: 0,
   monthlyInvoices: 0,
   totalRevenue: 0,
-  monthlyRevenue: 0
+  monthlyRevenue: 0,
 });
 const [currentMonthUsage, setCurrentMonthUsage] = useState(0);
 const [usageLimitReached, setUsageLimitReached] = useState(false);
@@ -648,11 +682,13 @@ const [usageLimitReached, setUsageLimitReached] = useState(false);
 **Purpose:** Multi-step invoice creation form.
 
 **Steps:**
+
 1. Form input (invoice details, items, customer info)
 2. Template selection
 3. Preview and save
 
 **Form Structure:**
+
 ```typescript
 interface InvoiceForm {
   invoiceNumber: string;
@@ -670,6 +706,7 @@ interface InvoiceForm {
 ```
 
 **Key Features:**
+
 - Dynamic item array (add/remove items)
 - Real-time calculation (subtotal, tax, total)
 - Pre-fill from customer database
@@ -681,12 +718,14 @@ interface InvoiceForm {
 **Purpose:** Visual template picker with live preview.
 
 **Features:**
+
 - Grid of 9 invoice templates
 - Live preview with actual invoice data
 - Click to select template
 - Navigation back to form
 
 **Template Registry:**
+
 ```typescript
 // src/utils/templateRegistry.ts
 const templates: Record<number, TemplateComponent> = {
@@ -705,6 +744,7 @@ export const getTemplate = (templateNumber: number) => {
 **Purpose:** Display and share generated invoices.
 
 **Actions:**
+
 - Download as JPEG
 - Share via WhatsApp
 - Export as CSV
@@ -713,21 +753,28 @@ export const getTemplate = (templateNumber: number) => {
 - Delete invoice
 
 **Image Generation:**
+
 ```typescript
 // src/utils/imageGeneration.ts
-export const generateInvoiceImage = async (elementId: string): Promise<Blob> => {
+export const generateInvoiceImage = async (
+  elementId: string,
+): Promise<Blob> => {
   const element = document.getElementById(elementId);
   const canvas = await html2canvas(element, {
     scale: 2,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     useCORS: true,
   });
-  
+
   return new Promise((resolve, reject) => {
-    canvas.toBlob((blob) => {
-      if (blob) resolve(blob);
-      else reject(new Error('Failed to generate image'));
-    }, 'image/jpeg', 0.9);
+    canvas.toBlob(
+      (blob) => {
+        if (blob) resolve(blob);
+        else reject(new Error("Failed to generate image"));
+      },
+      "image/jpeg",
+      0.9,
+    );
   });
 };
 ```
@@ -737,6 +784,7 @@ export const generateInvoiceImage = async (elementId: string): Promise<Blob> => 
 **Purpose:** Customer database management.
 
 **Features:**
+
 - CRUD operations (Create, Read, Update, Delete)
 - Search and filter
 - Transaction history per customer
@@ -748,10 +796,12 @@ export const generateInvoiceImage = async (elementId: string): Promise<Blob> => 
 **Purpose:** Subscription prompt when usage limit is reached.
 
 **Triggers:**
+
 - Free user creates 10th document in a month
 - Automatic detection on dashboard
 
 **Actions:**
+
 - View subscription plans
 - Initiate payment via Paystack
 - Dismiss (blocks further document creation)
@@ -768,7 +818,7 @@ Located in `src/components/ui/`, these are reusable components:
 - **select.tsx** - Dropdowns
 - **table.tsx** - Data tables
 - **toast.tsx** - Notifications
-- **phone-input.tsx** - Nigerian phone number input with formatting
+- **phone-input.tsx** - Phone number input with formatting
 - **passcode-input.tsx** - 4-digit passcode input (legacy)
 - **logo.tsx** - App logo component with size variants
 
@@ -781,31 +831,31 @@ export const PhoneInput = ({ value, onChange, label, required }: PhoneInputProps
   const [networkCode, setNetworkCode] = useState('');
   const [firstPart, setFirstPart] = useState('');
   const [lastPart, setLastPart] = useState('');
-  
+
   // Combines parts: +234 803 123 4567
   useEffect(() => {
     const fullNumber = `${countryCode}${networkCode}${firstPart}${lastPart}`;
     onChange?.(fullNumber);
   }, [countryCode, networkCode, firstPart, lastPart]);
-  
+
   return (
     <div>
       <Label>{label}</Label>
       <div className="flex gap-1">
         <Input value={countryCode} readOnly maxLength={4} />
-        <Input 
+        <Input
           placeholder="803"
           value={networkCode}
           onChange={(e) => setNetworkCode(e.target.value)}
           maxLength={3}
         />
-        <Input 
+        <Input
           placeholder="123"
           value={firstPart}
           onChange={(e) => setFirstPart(e.target.value)}
           maxLength={3}
         />
-        <Input 
+        <Input
           placeholder="4567"
           value={lastPart}
           onChange={(e) => setLastPart(e.target.value)}
@@ -825,11 +875,13 @@ export const PhoneInput = ({ value, onChange, label, required }: PhoneInputProps
 // Step 1: User fills form in CreateInvoice.tsx
 const onSubmit = async (data: InvoiceForm) => {
   // Calculate totals
-  const subTotal = data.items.reduce((sum, item) => 
-    sum + (item.quantity * item.unitPrice), 0);
+  const subTotal = data.items.reduce(
+    (sum, item) => sum + item.quantity * item.unitPrice,
+    0,
+  );
   const taxAmount = (subTotal * data.taxRate) / 100;
   const totalAmount = subTotal + taxAmount;
-  
+
   // Create invoice data object
   const invoiceData: InvoiceData = {
     invoiceNumber: data.invoiceNumber || `INV-${Date.now()}`,
@@ -840,23 +892,23 @@ const onSubmit = async (data: InvoiceForm) => {
       description: item.description,
       quantity: item.quantity,
       unitPrice: item.unitPrice,
-      totalPrice: item.quantity * item.unitPrice
+      totalPrice: item.quantity * item.unitPrice,
     })),
     subTotal,
     taxRate: data.taxRate,
-    totalAmount
+    totalAmount,
   };
-  
+
   // Move to template selection
   setInvoiceData(invoiceData);
-  setCurrentStep('template');
+  setCurrentStep("template");
 };
 
 // Step 2: User selects template
 const handleTemplateSelection = async (templateId: number) => {
   // Insert invoice record
   const { data: invoice, error } = await supabase
-    .from('invoices')
+    .from("invoices")
     .insert({
       user_id: user.id,
       customer_name: invoiceData.customerName,
@@ -866,20 +918,20 @@ const handleTemplateSelection = async (templateId: number) => {
     })
     .select()
     .single();
-  
+
   // Insert invoice items
-  const itemsToInsert = invoiceData.items.map(item => ({
+  const itemsToInsert = invoiceData.items.map((item) => ({
     invoice_id: invoice.id,
     description: item.description,
     quantity: item.quantity,
     unit_price: item.unitPrice,
-    total_price: item.totalPrice
+    total_price: item.totalPrice,
   }));
-  
-  await supabase.from('invoice_items').insert(itemsToInsert);
-  
+
+  await supabase.from("invoice_items").insert(itemsToInsert);
+
   // Navigate to dashboard
-  navigate('/dashboard');
+  navigate("/dashboard");
 };
 ```
 
@@ -888,32 +940,36 @@ const handleTemplateSelection = async (templateId: number) => {
 ```typescript
 // src/utils/imageGeneration.ts
 export const shareImageViaWhatsApp = async (
-  blob: Blob, 
-  message: string, 
-  phoneNumber: string
+  blob: Blob,
+  message: string,
+  phoneNumber: string,
 ) => {
   try {
     // Check if running in Android app
-    if ('AndroidShare' in window && (window as any).AndroidShare) {
+    if ("AndroidShare" in window && (window as any).AndroidShare) {
       const objectUrl = URL.createObjectURL(blob);
-      const cleanPhone = phoneNumber.replace(/\D/g, '');
-      (window as any).AndroidShare.shareToWhatsApp(cleanPhone, objectUrl, message);
+      const cleanPhone = phoneNumber.replace(/\D/g, "");
+      (window as any).AndroidShare.shareToWhatsApp(
+        cleanPhone,
+        objectUrl,
+        message,
+      );
       return;
     }
-    
+
     // For web: Download image and open WhatsApp
-    const cleanPhone = phoneNumber.replace(/\D/g, '');
+    const cleanPhone = phoneNumber.replace(/\D/g, "");
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
-    
+
     // Download image first
-    downloadImage(blob, 'receipt.jpg');
-    
+    downloadImage(blob, "receipt.jpg");
+
     // Then open WhatsApp
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, "_blank");
   } catch (error) {
-    console.error('Error sharing via WhatsApp:', error);
-    throw new Error('Unable to share. Please try again.');
+    console.error("Error sharing via WhatsApp:", error);
+    throw new Error("Unable to share. Please try again.");
   }
 };
 ```
@@ -942,16 +998,16 @@ const fetchCurrentMonthUsage = async () => {
       .lt('created_at', firstDayOfNextMonth.toISOString())
   ]);
 
-  const totalMonthlyUsage = 
+  const totalMonthlyUsage =
     (invoicesResponse.data?.length || 0) +
     (receiptsResponse.data?.length || 0);
-  
+
   setCurrentMonthUsage(totalMonthlyUsage);
-  
-  const limitReached = 
-    profile?.subscription_type === 'free' && 
+
+  const limitReached =
+    profile?.subscription_type === 'free' &&
     totalMonthlyUsage >= 10;
-  
+
   setUsageLimitReached(limitReached);
   setShowPaywall(limitReached);
 };
@@ -975,30 +1031,35 @@ WITH CHECK (
 // supabase/functions/initialize-payment/index.ts
 const handler = async (req: Request): Promise<Response> => {
   const { email, amount, planType } = await req.json();
-  
+
   const reference = `NR-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-  
-  const response = await fetch('https://api.paystack.co/transaction/initialize', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${Deno.env.get('PAYSTACK_SECRET_KEY')}`,
-      'Content-Type': 'application/json',
+
+  const response = await fetch(
+    "https://api.paystack.co/transaction/initialize",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${Deno.env.get("PAYSTACK_SECRET_KEY")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        amount: amount * 100, // Paystack uses kobo
+        reference,
+        metadata: { planType },
+        callback_url: `${req.headers.get("origin")}/payment-callback`,
+      }),
     },
-    body: JSON.stringify({
-      email,
-      amount: amount * 100, // Paystack uses kobo
-      reference,
-      metadata: { planType },
-      callback_url: `${req.headers.get('origin')}/payment-callback`
-    })
-  });
-  
+  );
+
   const data = await response.json();
-  
-  return new Response(JSON.stringify({
-    authorization_url: data.data.authorization_url,
-    reference: data.data.reference
-  }));
+
+  return new Response(
+    JSON.stringify({
+      authorization_url: data.data.authorization_url,
+      reference: data.data.reference,
+    }),
+  );
 };
 ```
 
@@ -1008,54 +1069,56 @@ const handler = async (req: Request): Promise<Response> => {
 // supabase/functions/verify-payment/index.ts
 const handler = async (req: Request): Promise<Response> => {
   const { reference } = await req.json();
-  
+
   // Verify with Paystack
   const response = await fetch(
     `https://api.paystack.co/transaction/verify/${reference}`,
     {
       headers: {
-        'Authorization': `Bearer ${Deno.env.get('PAYSTACK_SECRET_KEY')}`,
-      }
-    }
+        Authorization: `Bearer ${Deno.env.get("PAYSTACK_SECRET_KEY")}`,
+      },
+    },
   );
-  
+
   const data = await response.json();
-  
-  if (data.data.status === 'success') {
+
+  if (data.data.status === "success") {
     const planType = data.data.metadata.planType;
-    
+
     // Calculate expiry
     const expiryDate = new Date();
-    if (planType === 'monthly') {
+    if (planType === "monthly") {
       expiryDate.setMonth(expiryDate.getMonth() + 1);
-    } else if (planType === 'yearly') {
+    } else if (planType === "yearly") {
       expiryDate.setFullYear(expiryDate.getFullYear() + 1);
     }
-    
+
     // Update user profile
-    const authHeader = req.headers.get('Authorization');
+    const authHeader = req.headers.get("Authorization");
     const supabaseClient = createClient(
-      Deno.env.get('SUPABASE_URL'),
-      Deno.env.get('SUPABASE_ANON_KEY'),
-      { global: { headers: { Authorization: authHeader } } }
+      Deno.env.get("SUPABASE_URL"),
+      Deno.env.get("SUPABASE_ANON_KEY"),
+      { global: { headers: { Authorization: authHeader } } },
     );
-    
-    const { data: { user } } = await supabaseClient.auth.getUser();
-    
+
+    const {
+      data: { user },
+    } = await supabaseClient.auth.getUser();
+
     await supabaseClient
-      .from('profiles')
+      .from("profiles")
       .update({
         subscription_type: planType,
-        subscription_expires: expiryDate.toISOString()
+        subscription_expires: expiryDate.toISOString(),
       })
-      .eq('user_id', user.id);
-    
+      .eq("user_id", user.id);
+
     return new Response(JSON.stringify({ success: true }));
   }
-  
+
   return new Response(
-    JSON.stringify({ success: false, message: 'Payment not verified' }),
-    { status: 400 }
+    JSON.stringify({ success: false, message: "Payment not verified" }),
+    { status: 400 },
   );
 };
 ```
@@ -1068,33 +1131,30 @@ const handler = async (req: Request): Promise<Response> => {
 // src/components/ExportCSV.tsx
 export const generateCSV = (invoices: Invoice[]): string => {
   const headers = [
-    'Invoice Number',
-    'Date',
-    'Customer Name',
-    'Customer Phone',
-    'Amount',
-    'Status'
+    "Invoice Number",
+    "Date",
+    "Customer Name",
+    "Customer Phone",
+    "Amount",
+    "Status",
   ];
-  
-  const rows = invoices.map(inv => [
+
+  const rows = invoices.map((inv) => [
     inv.invoice_number,
     inv.invoice_date,
     inv.customer_name,
     inv.customer_phone,
     inv.amount,
-    inv.status
+    inv.status,
   ]);
-  
-  return [
-    headers.join(','),
-    ...rows.map(row => row.join(','))
-  ].join('\n');
+
+  return [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
 };
 
 export const downloadCSV = (csvContent: string, filename: string) => {
-  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const blob = new Blob([csvContent], { type: "text/csv" });
   const url = window.URL.createObjectURL(blob);
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.download = filename;
   link.click();
@@ -1106,7 +1166,10 @@ export const downloadCSV = (csvContent: string, filename: string) => {
 
 ```typescript
 // src/utils/xmlUtils.ts
-export const generateInvoiceXML = (invoice: Invoice, items: InvoiceItem[]): string => {
+export const generateInvoiceXML = (
+  invoice: Invoice,
+  items: InvoiceItem[],
+): string => {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <Invoice>
   <Header>
@@ -1116,13 +1179,17 @@ export const generateInvoiceXML = (invoice: Invoice, items: InvoiceItem[]): stri
     <CustomerPhone>${invoice.customer_phone}</CustomerPhone>
   </Header>
   <Items>
-    ${items.map(item => `
+    ${items
+      .map(
+        (item) => `
     <Item>
       <Description>${item.description}</Description>
       <Quantity>${item.quantity}</Quantity>
       <UnitPrice>${item.unit_price}</UnitPrice>
       <TotalPrice>${item.total_price}</TotalPrice>
-    </Item>`).join('')}
+    </Item>`,
+      )
+      .join("")}
   </Items>
   <Summary>
     <SubTotal>${invoice.sub_total}</SubTotal>
@@ -1160,7 +1227,7 @@ const Template10: React.FC<{ data: InvoiceData }> = ({ data }) => {
           <p>{new Date(data.invoiceDate).toLocaleDateString()}</p>
         </div>
       </div>
-      
+
       {/* Customer Info */}
       <div className="mb-6">
         <h3 className="font-semibold mb-2">Bill To:</h3>
@@ -1168,7 +1235,7 @@ const Template10: React.FC<{ data: InvoiceData }> = ({ data }) => {
         <p>{data.customerPhone}</p>
         {data.customerEmail && <p>{data.customerEmail}</p>}
       </div>
-      
+
       {/* Items Table */}
       <table className="w-full mb-6">
         <thead>
@@ -1190,7 +1257,7 @@ const Template10: React.FC<{ data: InvoiceData }> = ({ data }) => {
           ))}
         </tbody>
       </table>
-      
+
       {/* Totals */}
       <div className="flex justify-end">
         <div className="w-64">
@@ -1302,25 +1369,25 @@ import type { Note } from '@/types/notes';
 export const NotesManager = () => {
   const { user } = useAuth();
   const [notes, setNotes] = useState<Note[]>([]);
-  
+
   useEffect(() => {
     if (user) {
       fetchNotes();
     }
   }, [user]);
-  
+
   const fetchNotes = async () => {
     const { data, error } = await supabase
       .from('notes')
       .select('*')
       .eq('user_id', user?.id)
       .order('created_at', { ascending: false });
-    
+
     if (!error && data) {
       setNotes(data);
     }
   };
-  
+
   const createNote = async (title: string, content: string) => {
     const { error } = await supabase
       .from('notes')
@@ -1329,12 +1396,12 @@ export const NotesManager = () => {
         title,
         content
       });
-    
+
     if (!error) {
       fetchNotes();
     }
   };
-  
+
   return (
     <div>
       {/* UI implementation */}
@@ -1364,13 +1431,13 @@ export const useInvoices = () => {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
+
   useEffect(() => {
     if (user) {
       fetchInvoices();
     }
   }, [user]);
-  
+
   const fetchInvoices = async () => {
     try {
       setLoading(true);
@@ -1379,7 +1446,7 @@ export const useInvoices = () => {
         .select('*')
         .eq('user_id', user?.id)
         .order('created_at', { ascending: false });
-      
+
       if (error) throw error;
       setInvoices(data || []);
     } catch (err: any) {
@@ -1388,7 +1455,7 @@ export const useInvoices = () => {
       setLoading(false);
     }
   };
-  
+
   const createInvoice = async (invoiceData: Partial<Invoice>) => {
     try {
       const { data, error } = await supabase
@@ -1399,9 +1466,9 @@ export const useInvoices = () => {
         })
         .select()
         .single();
-      
+
       if (error) throw error;
-      
+
       // Refresh list
       await fetchInvoices();
       return { data, error: null };
@@ -1409,16 +1476,16 @@ export const useInvoices = () => {
       return { data: null, error: err.message };
     }
   };
-  
+
   const deleteInvoice = async (id: string) => {
     try {
       const { error } = await supabase
         .from('invoices')
         .delete()
         .eq('id', id);
-      
+
       if (error) throw error;
-      
+
       // Refresh list
       await fetchInvoices();
       return { error: null };
@@ -1426,7 +1493,7 @@ export const useInvoices = () => {
       return { error: err.message };
     }
   };
-  
+
   return {
     invoices,
     loading,
@@ -1442,9 +1509,9 @@ import { useInvoices } from '@/hooks/useInvoices';
 
 const MyComponent = () => {
   const { invoices, loading, createInvoice } = useInvoices();
-  
+
   if (loading) return <div>Loading...</div>;
-  
+
   return (
     <div>
       {invoices.map(invoice => (
@@ -1460,6 +1527,7 @@ const MyComponent = () => {
 ### Manual Testing Checklist
 
 #### Authentication Tests
+
 - [ ] Sign up with email
 - [ ] Sign in with email
 - [ ] Sign in with phone number
@@ -1469,6 +1537,7 @@ const MyComponent = () => {
 - [ ] Sign out functionality
 
 #### Invoice Creation Tests
+
 - [ ] Create invoice with single item
 - [ ] Create invoice with multiple items
 - [ ] Add/remove items dynamically
@@ -1478,11 +1547,13 @@ const MyComponent = () => {
 - [ ] Invoice appears in dashboard
 
 #### Receipt Creation Tests
+
 - [ ] Create quick receipt
 - [ ] Receipt saves correctly
 - [ ] Receipt appears in dashboard
 
 #### Customer Management Tests
+
 - [ ] Create new customer
 - [ ] Update customer details
 - [ ] Delete customer
@@ -1491,12 +1562,14 @@ const MyComponent = () => {
 - [ ] Create invoice for existing customer
 
 #### Payment Tests
+
 - [ ] Initialize payment (Paystack sandbox)
 - [ ] Verify payment callback
 - [ ] Subscription updated after payment
 - [ ] Usage limit removed for paid users
 
 #### Export Tests
+
 - [ ] Download invoice as JPEG
 - [ ] Export invoices as CSV
 - [ ] Export invoices as XML
@@ -1504,6 +1577,7 @@ const MyComponent = () => {
 - [ ] Share via WhatsApp (Android app)
 
 #### Usage Limit Tests
+
 - [ ] Free user hits 10 document limit
 - [ ] Paywall appears correctly
 - [ ] Document creation blocked
@@ -1511,6 +1585,7 @@ const MyComponent = () => {
 - [ ] Paid user has unlimited access
 
 #### Admin Tests
+
 - [ ] Admin can access admin dashboard
 - [ ] Admin can view all invoices/receipts
 - [ ] Non-admin cannot access admin routes
@@ -1521,29 +1596,29 @@ const MyComponent = () => {
 ```typescript
 // Example unit test structure (not currently implemented)
 // tests/utils/invoiceCalculations.test.ts
-import { describe, it, expect } from 'vitest';
-import { 
-  calculateSubTotal, 
-  calculateTaxAmount, 
-  calculateGrandTotal 
-} from '@/utils/invoiceCalculations';
+import { describe, it, expect } from "vitest";
+import {
+  calculateSubTotal,
+  calculateTaxAmount,
+  calculateGrandTotal,
+} from "@/utils/invoiceCalculations";
 
-describe('Invoice Calculations', () => {
-  it('calculates subtotal correctly', () => {
+describe("Invoice Calculations", () => {
+  it("calculates subtotal correctly", () => {
     const items = [
       { quantity: 2, unitPrice: 100, totalPrice: 200 },
-      { quantity: 1, unitPrice: 50, totalPrice: 50 }
+      { quantity: 1, unitPrice: 50, totalPrice: 50 },
     ];
     expect(calculateSubTotal(items)).toBe(250);
   });
-  
-  it('calculates tax amount correctly', () => {
+
+  it("calculates tax amount correctly", () => {
     const subTotal = 1000;
     const taxRate = 7.5;
     expect(calculateTaxAmount(subTotal, taxRate)).toBe(75);
   });
-  
-  it('calculates grand total correctly', () => {
+
+  it("calculates grand total correctly", () => {
     const subTotal = 1000;
     const taxAmount = 75;
     expect(calculateGrandTotal(subTotal, taxAmount)).toBe(1075);
@@ -1568,16 +1643,18 @@ describe('Invoice Calculations', () => {
 **Problem:** User can't log in with phone number
 
 **Solution:**
+
 - Check `get_profile_by_phone()` function is deployed
 - Verify phone number normalization (spaces, country code)
 - Check RLS policies on profiles table
 - Ensure phone column is indexed
 
 **Debug:**
+
 ```typescript
 // Add console logs in signInWithPhone
-console.log('Normalized phone:', normalizedPhone);
-console.log('Profile data:', profileData);
+console.log("Normalized phone:", normalizedPhone);
+console.log("Profile data:", profileData);
 ```
 
 #### 2. Invoice Not Saving
@@ -1585,12 +1662,14 @@ console.log('Profile data:', profileData);
 **Problem:** Invoice form submits but doesn't save to database
 
 **Solution:**
+
 - Check RLS policies allow INSERT
 - Verify user is authenticated
 - Check usage limit hasn't been reached
 - Ensure all required fields are provided
 
 **Debug:**
+
 ```typescript
 // Check response
 const { data, error } = await supabase.from('invoices').insert(...);
@@ -1602,12 +1681,14 @@ console.log('Insert result:', { data, error });
 **Problem:** Free users can create more than 3 documents
 
 **Solution:**
+
 - Verify `check_usage_limit()` function exists
 - Check function is called in RLS policy
 - Ensure invoice_count and receipt_count are incrementing
 - Check subscription_type is set correctly
 
 **Debug:**
+
 ```sql
 -- Check user's current counts
 SELECT invoice_count, receipt_count, subscription_type
@@ -1620,19 +1701,21 @@ WHERE user_id = 'user-uuid-here';
 **Problem:** WhatsApp button doesn't work
 
 **Solution:**
+
 - Ensure phone number is properly formatted
 - Check if running on mobile vs desktop
 - Verify image generation is successful
 - Check browser permissions for downloads
 
 **Debug:**
+
 ```typescript
 // Test image generation
 try {
-  const blob = await generateInvoiceImage('invoice-element-id');
-  console.log('Image blob:', blob);
+  const blob = await generateInvoiceImage("invoice-element-id");
+  console.log("Image blob:", blob);
 } catch (error) {
-  console.error('Image generation failed:', error);
+  console.error("Image generation failed:", error);
 }
 ```
 
@@ -1641,12 +1724,14 @@ try {
 **Problem:** Payment successful but subscription not updated
 
 **Solution:**
+
 - Check Paystack webhook/callback URL is correct
 - Verify `verify-payment` edge function is deployed
 - Check edge function logs in Supabase dashboard
 - Ensure Paystack secret key is set in Supabase secrets
 
 **Debug:**
+
 ```typescript
 // Check edge function logs
 // In Supabase dashboard: Functions > verify-payment > Logs
@@ -1657,17 +1742,19 @@ try {
 **Problem:** Selected template doesn't render
 
 **Solution:**
+
 - Verify template is registered in `templateRegistry.ts`
 - Check template component doesn't have errors
 - Ensure invoice data structure matches template props
 - Check console for React errors
 
 **Debug:**
+
 ```typescript
 // Check template registry
-import { getTemplate } from '@/utils/templateRegistry';
+import { getTemplate } from "@/utils/templateRegistry";
 const Template = getTemplate(1);
-console.log('Template component:', Template);
+console.log("Template component:", Template);
 ```
 
 #### 7. RLS Policy Errors
@@ -1675,12 +1762,14 @@ console.log('Template component:', Template);
 **Problem:** "new row violates row-level security policy"
 
 **Solution:**
+
 - Ensure user_id is set to auth.uid() in INSERT
 - Check WITH CHECK clause in policy
 - Verify user is authenticated
 - Check policy applies to correct operation (SELECT, INSERT, UPDATE, DELETE)
 
 **Debug:**
+
 ```sql
 -- Test policy directly
 SELECT * FROM invoices; -- Should only show user's invoices
@@ -1691,11 +1780,13 @@ SELECT * FROM invoices; -- Should only show user's invoices
 **Problem:** "infinite recursion detected in policy"
 
 **Solution:**
+
 - Use SECURITY DEFINER functions for admin checks
 - Don't query the same table in its RLS policy
 - Use helper functions instead of direct queries
 
 **Example:**
+
 ```sql
 -- WRONG (causes recursion)
 CREATE POLICY "Admin access"
@@ -1780,6 +1871,7 @@ test: Add unit tests for template registry
 ## 📞 Support
 
 For technical support or questions:
+
 - **Email**: johnnybgsu@gmail.com
 - **Documentation**: This guide
 - **Supabase Docs**: https://supabase.com/docs
@@ -1789,5 +1881,3 @@ For technical support or questions:
 **Last Updated:** 2025-01-10
 **Version:** 1.0.0
 **Maintainer:** OmniReceipts Development Team
-
-

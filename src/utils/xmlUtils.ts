@@ -81,7 +81,7 @@ export const generateUBLInvoiceXML = (
       ${profile?.business_address ? `
       <cac:PostalAddress>
         <cbc:StreetName>${escapeXml(profile.business_address)}</cbc:StreetName>
-        <cbc:CityName>Nigeria</cbc:CityName>
+        <cbc:CityName>City</cbc:CityName>
         <cac:Country>
           <cbc:IdentificationCode>NG</cbc:IdentificationCode>
         </cac:Country>
@@ -190,7 +190,7 @@ export const generateUBLReceiptXML = (
       ${profile?.business_address ? `
       <cac:PostalAddress>
         <cbc:StreetName>${escapeXml(profile.business_address)}</cbc:StreetName>
-        <cbc:CityName>Nigeria</cbc:CityName>
+        <cbc:CityName>City</cbc:CityName>
         <cac:Country>
           <cbc:IdentificationCode>NG</cbc:IdentificationCode>
         </cac:Country>

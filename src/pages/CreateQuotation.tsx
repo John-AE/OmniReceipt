@@ -276,7 +276,7 @@ const CreateQuotation = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#EAC435]/5 via-background to-accent/5">
       <MetaSEO 
         title="Create Quotation" 
-        description="Create professional quotations and estimates for your Nigerian business. Set validity dates and share with customers via WhatsApp."
+        description="Create professional quotations and estimates for your business. Set validity dates and share with customers via WhatsApp."
         canonicalPath="/create-quotation"
       />
       {/* Header */}

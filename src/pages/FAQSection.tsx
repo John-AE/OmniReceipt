@@ -16,43 +16,27 @@ const FAQSection = () => {
   const faqs = [
     {
       question: "What is OmniReceipts and how does it work?",
-      answer: "OmniReceipts is a simple-to-use online tool that helps Nigerian businesses, freelancers, and artisans create professional invoices and receipts in JPEG format. You simply just enter your customer details, transaction details, customize, and share/issue instantly."
+      answer: "OmniReceipts is a simple-to-use online tool that helps businesses, freelancers, and artisans create professional invoices and receipts in JPEG format. You simply just enter your customer details, transaction details, customize, and share/issue instantly."
     },
     {
-  question: "Can OmniReceipts invoices and receipts be used for tax or record-keeping purposes?",
-  answer: (
+      question: "Can OmniReceipts invoices and receipts be used for tax or record-keeping purposes?",
+      answer: (
           <>
             Yes, especially with the new tax law coming into effect in 2026, receipts generated can be saved,
             downloaded and printed for accounting, audits, and tax purposes. They can also be exported in XML and CSV format.
-            We know that Nigeria is aligning with global standards in terms of the proposed e-invoicing championed by the FIRS{" "}
-            <a
-              href="https://einvoice.firs.gov.ng/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary underline"
-            >
-              https://einvoice.firs.gov.ng/
-            </a>.
+            We know that many countries are aligning with global standards in terms of e-invoicing.
           </>
         )
       },
      {
       question: "Can I generate a JPEG invoice or receipt instantly?",
-      answer: "Yes. OmniReceipts is designed for ease and speed — you can create and share a receipt or invoice in less than a minute. Once the share button is clicked, your Whatsapp is opened up immediately, with the document attached and the customer’s phone number set as recipient. All that will then be required is to hit send on Whatsapp. For repeat customers, their information is pre-filled in the creation forms which will allow for a faster sharing of documents. "
+      answer: "Yes. OmniReceipts is designed for ease and speed — you can create and share a receipt or invoice in less than a minute. Once the share button is clicked, your Whatsapp is opened up immediately, with the document attached and the customer's phone number set as recipient. All that will then be required is to hit send on Whatsapp. For repeat customers, their information is pre-filled in the creation forms which will allow for a faster sharing of documents. "
     },
     {
-      question: "Why should Nigerian businesses switch from handwritten receipts to digital receipts?",
+      question: "Why should businesses switch from handwritten receipts to digital receipts?",
       answer: (
         <>
-          Again, because of the new tax law coming into effect from 1st January 2026, record-keeping has become very essential for all business owners, freelancers, artisans and self-employed workers. We need to start aligning with global standards. See a report from PwC about the proposed e-invoicing in Nigeria{" "}
-          <a
-            href="https://www.pwc.com/ng/en/assets/pdf/key-facts-about-proposed-e-invoicing-in-nigeria.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary underline"
-          >
-            here
-          </a>.
+          Again, because of the new tax law coming into effect from 1st January 2026, record-keeping has become very essential for all business owners, freelancers, artisans and self-employed workers. We need to start aligning with global standards. You can read more about e-invoicing trends globally.
         </>
       )
     },
@@ -74,23 +58,23 @@ const FAQSection = () => {
     },
     {
       question: "How do I create a receipt online on OmniReceipts?",
-      answer: "Simply open OmniReceipts and log in with your email and password, click the “Create Receipt” button, and then fill in your business details (if different from your pre-filled details during registration), add customer information, add transaction details, and share your receipt via Whatsapp in one-click as a JPEG instantly."
+      answer: "Simply open OmniReceipts and log in with your email and password, click the 'Create Receipt' button, and then fill in your business details (if different from your pre-filled details during registration), add customer information, add transaction details, and share your receipt via Whatsapp in one-click as a JPEG instantly."
     },
     {
       question: "Can I create professional-looking receipts without design skills?",
       answer: "Yes. Our ready-to-use templates automatically format your receipts and invoices, so they look neat and professional. You will be able to preview the receipt or invoice before it is generated."
     },
      {
-      question: "Are receipts and invoices generated with OmniReceipts accepted for business transactions in Nigeria?",
-      answer: "Yes. OmniReceipts receipts and invoices are professional and valid for day-to-day business use in Nigeria. Many small businesses already save paper by the use of digital invoices and receipts."
+      question: "Are receipts and invoices generated with OmniReceipts accepted for business transactions?",
+      answer: "OmniReceipts receipts and invoices are professional and valid for day-to-day business use. Many small businesses already save paper by the use of digital invoices and receipts."
     },
      {
       question: "What details are included or can I include on my invoice or receipt?",
       answer: "You can add your business name, business address, customer details, amount, payment date, and even automatic numbering for professional record-keeping. You can also include an itemized list of the transaction details."
     },
      {
-      question: "How do small businesses in Nigeria issue professional invoices or receipts?",
-      answer: "Sadly, in Nigeria, it is very common to have invoices and receipts issued as handwritten notes, when these documents can simply be made using OmniReceipts to create clean, branded digital documents that customers trust and portray professionalism."
+      question: "How do small businesses issue professional invoices or receipts?",
+      answer: "It is common to have invoices and receipts issued as handwritten notes, when these documents can simply be made using OmniReceipts to create clean, branded digital documents that customers trust and portray professionalism."
     },
     {
       question: "Are there hidden charges for using OmniReceipts?",
@@ -101,27 +85,19 @@ const FAQSection = () => {
       answer: "Yes, you can use the free tier subscription to test it out before upgrading. Everyone that signs up is placed in the free tier by default."
     },
     {
-      question: "What is the best free invoice generator in Nigeria?",
-      answer: "OmniReceipts is one of the best free invoice and receipt generators in Nigeria — simple, fast, and built for small businesses."
+      question: "What is the best free invoice generator?",
+      answer: "OmniReceipts is one of the best free invoice and receipt generators — simple, fast, and built for small businesses."
     },
     {
-      question: "How can I create a receipt for my small business in Nigeria without using paper?",
+      question: "How can I create a receipt for my small business without using paper?",
       answer: (
         <>
-          You can create receipts online with OmniReceipts by signing up, entering transaction details and sharing a ready-made receipt instantly via your Whatsapp. Moreover, in alignment with Nigeria’s overarching Digital Economy Policy and Strategy (2020–2030), emphasizing transparency, compliance, and efficiency is key. To read further, see a report from the RTCsuite on e-invoicing{" "}
-          <a
-            href="https://rtcsuite.com/stakeholder-engagement-on-nigerias-e-invoicing-implementation-key-insights-comprehensive-guide/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary underline"
-          >
-            here
-          </a>.
+          You can create receipts online with OmniReceipts by signing up, entering transaction details and sharing a ready-made receipt instantly via your Whatsapp. Moreover, in alignment with many countries' Digital Economy Policies, emphasizing transparency, compliance, and efficiency is key.
         </>
       )
     },
     {
-      question: "What is the easiest way to create professional invoices in Nigeria?",
+      question: "What is the easiest way to create professional invoices?",
       answer: "One of the easiest ways is using OmniReceipts — no design skills, no software, just enter your transaction details and share."
     }
   ];
@@ -211,21 +187,3 @@ const FAQSection = () => {
 };
 
 export default FAQSection;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

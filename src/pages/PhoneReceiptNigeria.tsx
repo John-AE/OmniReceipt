@@ -8,7 +8,7 @@ import MetaSEO from '@/components/MetaSEO';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 
-const PhoneReceiptNigeria = () => {
+const DeviceReceipts = () => {
   // State for mobile menu toggle
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   // State for download modal
@@ -31,9 +31,9 @@ const PhoneReceiptNigeria = () => {
   return (
     <div className="min-h-screen bg-white font-poppins">
       <MetaSEO
-        title="Phone & Laptop Receipts in Nigeria"
-        description="Create professional receipts for phone sales and laptop sales in Nigeria. Instant generation and WhatsApp sharing with OmniReceipts."
-        canonicalPath="/phone-receipt-nigeria"
+        title="Phone & Laptop Receipts - Device Sales Receipt Generator"
+        description="Create professional receipts for phone and laptop sales. Instant generation and WhatsApp sharing with OmniReceipts."
+        canonicalPath="/device-receipts"
       />
       <SiteHeader />
 
@@ -42,10 +42,10 @@ const PhoneReceiptNigeria = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              Phone Receipt in Nigeria
+              Device Sales Receipts
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Create professional receipts for phone sales and laptop sales in Nigeria with OmniReceipts.
+              Create professional receipts for phone and laptop sales with OmniReceipts.
               Our app makes it easy to generate beautiful, shareable receipts instantly.
             </p>
 
@@ -85,11 +85,11 @@ const PhoneReceiptNigeria = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Create Phone Receipts in Nigeria
+                Create Phone Receipts
               </h2>
               <p className="text-lg text-gray-600 mb-6">
                 Whether you're selling smartphones, accessories, or mobile devices, OmniReceipts helps you create
-                professional receipts that impress your customers. Perfect for phone dealers, retailers, and resellers across Nigeria.
+                professional receipts that impress your customers. Perfect for phone dealers, retailers, and resellers worldwide.
               </p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center gap-3">
@@ -130,7 +130,7 @@ const PhoneReceiptNigeria = () => {
             </div>
             <div className="order-1 lg:order-2">
               <h2 className="text-3xl font-bold text-gray-900 mb-6">
-                Create Laptop Receipts in Nigeria
+                Create Laptop Receipts
               </h2>
               <p className="text-lg text-gray-600 mb-6">
                 For computer stores, tech retailers, and online sellers, generate professional laptop receipts
@@ -167,7 +167,7 @@ const PhoneReceiptNigeria = () => {
             Start Creating Professional Receipts Today
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of Nigerian businesses using OmniReceipts for their receipt and invoice creation needs
+            Join thousands of businesses worldwide using OmniReceipts for their receipt and invoice creation needs
           </p>
           <a
             href="https://www.OmniReceipts.com.ng/OmniReceipts.apk"
@@ -193,6 +193,4 @@ const PhoneReceiptNigeria = () => {
   );
 };
 
-export default PhoneReceiptNigeria;
-
-
+export { DeviceReceipts as PhoneReceiptNigeria };

@@ -1,7 +1,7 @@
 {
   "name": "OmniReceipts - Professional Receipts for Artisans",
   "short_name": "OmniReceipts",
-  "description": "Fast professional receipts and invoices for Nigerian artisans. Create, share via WhatsApp instantly.",
+  "description": "Fast professional receipts and invoices for artisans and small businesses. Create, share via WhatsApp instantly.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

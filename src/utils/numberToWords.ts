@@ -1,5 +1,5 @@
 /**
- * Converts a number to words in Nigerian Naira format
+ * Converts a number to words in currency format
  * Example: 4567000 => "Four Million Five Hundred and Sixty-Seven Thousand Naira Only"
  */
 

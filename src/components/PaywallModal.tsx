@@ -167,7 +167,7 @@ const PaywallModal = ({ open, onOpenChange }: PaywallModalProps) => {
             You can change or cancel your subscription at any time.
           </p>
           <p className="text-xs text-muted-foreground text-center">
-            Prices are in Nigerian Naira (₦). No setup fees or hidden charges.
+            Prices are in Naira (₦). No setup fees or hidden charges.
           </p>
         </DialogFooter>
       </DialogContent>

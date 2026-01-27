@@ -10,7 +10,7 @@ export const supportedCurrencies: Currency[] = [
   { code: 'USD', symbol: '$', name: 'US Dollar', locale: 'en-US', dialingCode: '1' },
   { code: 'EUR', symbol: '€', name: 'Euro', locale: 'de-DE', dialingCode: '49' },
   { code: 'GBP', symbol: '£', name: 'British Pound', locale: 'en-GB', dialingCode: '44' },
-  { code: 'NGN', symbol: '₦', name: 'Nigerian Naira', locale: 'en-NG', dialingCode: '234' },
+  { code: 'NGN', symbol: '₦', name: 'Naira', locale: 'en-NG', dialingCode: '234' },
   { code: 'GHS', symbol: '₵', name: 'Ghanaian Cedi', locale: 'en-GH', dialingCode: '233' },
   { code: 'KES', symbol: 'KSh', name: 'Kenyan Shilling', locale: 'en-KE', dialingCode: '254' },
   { code: 'ZAR', symbol: 'R', name: 'South African Rand', locale: 'en-ZA', dialingCode: '27' },

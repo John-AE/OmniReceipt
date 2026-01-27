@@ -133,7 +133,7 @@ export const AndroidDownloadModal = ({ isOpen, onClose }: AndroidDownloadModalPr
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Globe className="h-4 w-4 text-primary" />
-                <span className="text-foreground">Trusted by small businesses across Nigeria</span>
+                <span className="text-foreground">Trusted by small businesses worldwide</span>
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@ export const AndroidDownloadModal = ({ isOpen, onClose }: AndroidDownloadModalPr
                 This is a standard security measure, not an indication that OmniReceipts is unsafe.
               </p>
               <p className="font-medium text-foreground">
-                OmniReceipts is a legitimate business application used by thousands of Nigerian small business owners.
+                OmniReceipts is a legitimate business application used by thousands of small business owners worldwide.
               </p>
             </div>
           )}
