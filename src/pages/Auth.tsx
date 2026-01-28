@@ -251,7 +251,7 @@ const Auth = () => {
                       <Input
                         id="artisan-name"
                         type="text"
-                        placeholder="Ade Ike"
+                        placeholder="Jane Doe"
                         {...signUpForm.register('artisanName', { required: 'Name is required' })}
                         className="h-12"
                       />
@@ -262,7 +262,7 @@ const Auth = () => {
                       <Input
                         id="business-name"
                         type="text"
-                        placeholder="Ade's Plumbing Services"
+                        placeholder="Jane's Book-Keeping"
                         {...signUpForm.register('businessName', { required: 'Business name is required' })}
                         className="h-12"
                       />
