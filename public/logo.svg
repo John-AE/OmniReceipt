@@ -1,11 +1,9 @@
-<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="500" height="500" rx="60" fill="#10B981"/>
-  <path d="M170 120H330C341.046 120 350 128.954 350 140V180C350 191.046 341.046 200 330 200H170C158.954 200 150 191.046 150 180V140C150 128.954 158.954 120 170 120Z" stroke="white" stroke-width="8"/>
-  <path d="M150 180H350" stroke="white" stroke-width="8"/>
-  <path d="M180 220H320" stroke="white" stroke-width="8" stroke-linecap="round"/>
-  <path d="M180 250H290" stroke="white" stroke-width="8" stroke-linecap="round"/>
-  <path d="M180 280H260" stroke="white" stroke-width="8" stroke-linecap="round"/>
-  <path d="M180 310H310" stroke="white" stroke-width="8" stroke-linecap="round"/>
-  <path d="M240 360H330C340.493 360 348 367.507 348 378C348 388.493 340.493 396 330 396H240C229.507 396 222 388.493 222 378C222 367.507 229.507 360 240 360Z" stroke="white" stroke-width="6" stroke-linecap="round"/>
-  <path d="M250 410H280" stroke="white" stroke-width="6" stroke-linecap="round"/>
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="180" rx="36" fill="#10B981"/>
+  <path d="M50 45H130C139.389 45 147 52.6107 147 62V75C147 84.3893 139.389 92 130 92H50C40.6107 92 33 84.3893 33 75V62C33 52.6107 40.6107 45 50 45Z" stroke="white" stroke-width="4"/>
+  <path d="M33 75H147" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <path d="M55 100H125" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <path d="M55 115H105" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <path d="M55 130H95" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <path d="M85 150H120C126.075 150 130 153.925 130 160C130 166.075 126.075 170 120 170H85C78.925 170 75 166.075 75 160C75 153.925 78.925 150 85 150Z" stroke="white" stroke-width="4" stroke-linecap="round"/>
 </svg>
