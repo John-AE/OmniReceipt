@@ -16,7 +16,7 @@ const FAQSection = () => {
   const faqs = [
     {
       question: "What is OmniReceipts and how does it work?",
-      answer: "OmniReceipts is a simple-to-use online tool that helps businesses, freelancers, and artisans create professional invoices and receipts in JPEG format. You simply just enter your customer details, transaction details, customize, and share/issue instantly."
+      answer: "OmniReceipts is a simple-to-use online tool that helps businesses, freelancers, and entrepreneurs create professional invoices and receipts in JPEG format. You simply just enter your customer details, transaction details, customize, and share/issue instantly."
     },
     {
       question: "Can OmniReceipts invoices and receipts be used for tax or record-keeping purposes?",
@@ -36,7 +36,7 @@ const FAQSection = () => {
       question: "Why should businesses switch from handwritten receipts to digital receipts?",
       answer: (
         <>
-          Again, because of the new tax law coming into effect from 1st January 2026, record-keeping has become very essential for all business owners, freelancers, artisans and self-employed workers. We need to start aligning with global standards. You can read more about e-invoicing trends globally.
+          Again, because of the new tax law coming into effect from 1st January 2026, record-keeping has become very essential for all business owners, freelancers, entrepreneurs and self-employed workers. We need to start aligning with global standards. You can read more about e-invoicing trends globally.
         </>
       )
     },

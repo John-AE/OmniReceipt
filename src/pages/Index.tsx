@@ -107,13 +107,13 @@ const Index = () => {
               <h1 className="text-4xl sm:text-6xl font-bold text-foreground mb-6">
                 <span className="block font-poppins font-extrabold tracking-tight">OmniReceipts</span>
                 <span className="text-2xl sm:text-3xl text-primary font-normal block mt-2">
-                  Fast professional invoice and receipts app for artisans, small businesses, freelancers, everyone!
+                  Fast professional invoice and receipts app for entrepreneurs, small businesses, freelancers, everyone!
                 </span>
               </h1>
 
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl lg:max-w-none">
                 Create beautiful invoices and receipts in seconds. Share via WhatsApp instantly.
-                Perfect for artisans, craftsmen, and small business owners worldwide.
+                Perfect for entrepreneurs, craftsmen, and small business owners worldwide.
               </p>
 
               {/* CTA Buttons */}
@@ -242,7 +242,7 @@ const Index = () => {
               Everything you need to manage invoices and receipts
             </h2>
             <p className="text-xl text-muted-foreground">
-              Simple, fast, and designed for mobile-first artisans
+              Simple, fast, and designed for mobile-first entrepreneurs
             </p>
           </div>
 
@@ -317,7 +317,7 @@ const Index = () => {
             Ready to professionalize your business?
           </h2>
           <p className="text-xl text-muted-foreground mb-8">
-            Join thousands of artisans using OmniReceipts to grow their business
+            Join thousands of entrepreneurs using OmniReceipts to grow their business
           </p>
           <a
             href="https://www.OmniReceipts.com.ng/OmniReceipts.apk"
@@ -421,7 +421,7 @@ const Index = () => {
           <div className="prose prose-lg text-muted-foreground max-w-none space-y-4">
             <p>
               OmniReceipts is the leading invoice and receipt generator built for businesses worldwide.
-              Whether you're an artisan, freelancer, or small business owner, our platform helps you create
+              Whether you're an entrepreneur, freelancer, or small business owner, our platform helps you create
               professional documents in seconds. With tax authorities worldwide pushing for digital compliance,
               having proper documentation is more important than ever.
             </p>
