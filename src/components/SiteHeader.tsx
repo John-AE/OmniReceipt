@@ -32,6 +32,7 @@ const SiteHeader = () => {
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-6">
                         <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium">Home</Link>
+                        <Link to="/pricing" className="text-foreground hover:text-primary transition-colors font-medium">Pricing</Link>
                         <button
                             onClick={() => scrollToSection('about')}
                             className="text-foreground hover:text-primary transition-colors font-medium"
@@ -75,6 +76,7 @@ const SiteHeader = () => {
                     <div className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-md">
                         <div className="px-2 pt-2 pb-3 space-y-1">
                             <Link to="/" className="block px-3 py-2 text-foreground hover:text-primary hover:bg-muted transition-colors font-medium rounded-md">Home</Link>
+                            <Link to="/pricing" className="block px-3 py-2 text-foreground hover:text-primary hover:bg-muted transition-colors font-medium rounded-md">Pricing</Link>
                             <button
                                 onClick={() => scrollToSection('about')}
                                 className="block w-full text-left px-3 py-2 text-foreground hover:text-primary hover:bg-muted transition-colors font-medium rounded-md"

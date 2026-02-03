@@ -20,6 +20,7 @@ import TermsAndConditions from "./pages/TermsAndConditions";
 import PriceListPreview from "./pages/PriceListPreview";
 import PriceListManagement from "./pages/PriceListManagement";
 import PriceListView from "./pages/PriceListView";
+import Pricing from "./pages/Pricing";
 
 
 const queryClient = new QueryClient();
@@ -49,6 +50,7 @@ const App = () => (
               <Route path="/payment-callback" element={<PaymentCallback />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/terms" element={<TermsAndConditions />} />
+              <Route path="/pricing" element={<Pricing />} />
               <Route path="/pricelist-preview" element={<PriceListPreview />} />
               <Route path="/price-list" element={<PriceListManagement />} />
               <Route path="/pricelist/:slug" element={<PriceListView />} />

@@ -23,6 +23,7 @@ const SiteFooter = () => {
                         <h4 className="font-bold mb-4">Quick Links</h4>
                         <ul className="space-y-2">
                             <li><Link to="/" className="text-muted-foreground hover:text-primary transition-colors">Home</Link></li>
+                            <li><Link to="/pricing" className="text-muted-foreground hover:text-primary transition-colors">Pricing</Link></li>
                             <li><Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">FAQs</Link></li>
                             <li><Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">Terms & Conditions</Link></li>
                             <li><Link to="/auth" className="text-muted-foreground hover:text-primary transition-colors">Sign In / Register</Link></li>
