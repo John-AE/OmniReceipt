@@ -244,7 +244,7 @@ const Dashboard = () => {
             <div className="flex flex-col gap-2 mt-4 w-full">
               <div className="flex gap-2">
                 <Button
-                  className="flex-1 sm:w-auto bg-[#EAC435] text-black hover:bg-[#EAC435]/90"
+                  className="flex-1 sm:w-auto bg-[#2B4162] text-white hover:bg-[#1f2e47]"
                   disabled={usageLimitReached}
                   onClick={() => !usageLimitReached && navigate('/create-quotation')}
                 >
