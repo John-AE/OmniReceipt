@@ -11,6 +11,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import MetaSEO from "@/components/MetaSEO";
 import { Link, useNavigate } from 'react-router-dom';
+import { getCurrencySymbol } from '@/utils/currencyConfig';
 
 import CreateReceiptDialog from '@/components/CreateReceiptDialog';
 import PaywallModal from '@/components/PaywallModal';
@@ -350,7 +351,7 @@ const Dashboard = () => {
                 <CardDescription>All time earnings</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-lg sm:text-2xl lg:text-3xl font-semibold sm:font-bold text-primary break-words">₦{Math.floor(stats.totalRevenue).toLocaleString()}</div>
+                <div className="text-lg sm:text-2xl lg:text-3xl font-semibold sm:font-bold text-primary break-words">{getCurrencySymbol(profile?.currency || 'USD')}{Math.floor(stats.totalRevenue).toLocaleString()}</div>
               </CardContent>
             </Card>
 
@@ -363,7 +364,7 @@ const Dashboard = () => {
                 <CardDescription>This month's earnings</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-lg sm:text-2xl lg:text-3xl font-semibold sm:font-bold text-primary break-words">₦{Math.floor(stats.monthlyRevenue).toLocaleString()}</div>
+                <div className="text-lg sm:text-2xl lg:text-3xl font-semibold sm:font-bold text-primary break-words">{getCurrencySymbol(profile?.currency || 'USD')}{Math.floor(stats.monthlyRevenue).toLocaleString()}</div>
               </CardContent>
             </Card>
 

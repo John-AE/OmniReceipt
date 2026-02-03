@@ -11,6 +11,7 @@ import { AdminQuotationsList } from '@/components/AdminQuotationsList';
 import { TemplateAnalytics } from '@/components/TemplateAnalytics';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
+import { getCurrencySymbol } from '@/utils/currencyConfig';
 
 interface UserProfile {
   id: string;
@@ -435,7 +436,7 @@ const fetchData = async () => {
               <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">₦{totalSubscriptionRevenue.toLocaleString()}</div>
+              <div className="text-2xl font-bold">{getCurrencySymbol('USD')}{totalSubscriptionRevenue.toLocaleString()}</div>
               <p className="text-xs text-muted-foreground mt-1">from verified subscription payments</p>
             </CardContent>
           </Card>
@@ -474,7 +475,7 @@ const fetchData = async () => {
                             {transaction.subscription_type}
                           </Badge>
                         </td>
-                        <td className="p-2 font-semibold">₦{Number(transaction.amount).toLocaleString()}</td>
+                        <td className="p-2 font-semibold">{getCurrencySymbol('USD')}{Number(transaction.amount).toLocaleString()}</td>
                         <td className="p-2">
                           <Badge variant={transaction.payment_status === 'success' ? 'default' : 'destructive'}>
                             {transaction.payment_status}
@@ -618,7 +619,7 @@ const fetchData = async () => {
                       </td>
                       <td className="p-2">
                         <span className="inline-flex items-center gap-1 font-semibold text-green-600">
-                          ₦{(user.monthly_revenue || 0).toLocaleString()}
+                          {getCurrencySymbol('USD')}{(user.monthly_revenue || 0).toLocaleString()}
                         </span>
                       </td>
                       <td className="p-2 whitespace-nowrap">{new Date(user.created_at).toLocaleDateString()}</td>

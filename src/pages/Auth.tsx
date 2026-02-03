@@ -12,6 +12,8 @@ import { useAuth } from '@/hooks/useAuth';
 import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import MetaSEO from '@/components/MetaSEO';
+import { supportedCurrencies, getCurrencySymbol } from '@/utils/currencyConfig';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface SignUpForm {
   email: string;
@@ -21,6 +23,7 @@ interface SignUpForm {
   businessAddress: string;
   phone: string;
   referralSource: string;
+  currency: string;
 }
 
 interface SignInForm {
@@ -61,7 +64,7 @@ const Auth = () => {
 
   const handleSignUp = async (data: SignUpForm) => {
     setIsSigningUp(true);
-    const { error } = await signUp(data.email, data.password, data.artisanName, data.businessName, data.businessAddress, data.phone, data.referralSource);
+    const { error } = await signUp(data.email, data.password, data.artisanName, data.businessName, data.businessAddress, data.phone, data.referralSource, data.currency);
     setIsSigningUp(false);
 
     if (!error) {
@@ -330,6 +333,25 @@ const Auth = () => {
                         })}
                         className="h-12"
                       />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="currency">Currency</Label>
+                      <Select
+                        onValueChange={(value) => signUpForm.setValue('currency', value)}
+                        defaultValue={signUpForm.watch('currency') || 'USD'}
+                      >
+                        <SelectTrigger id="currency" className="h-12">
+                          <SelectValue placeholder="Select currency" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {supportedCurrencies.map((currency) => (
+                            <SelectItem key={currency.code} value={currency.code}>
+                              {currency.symbol} {currency.code} - {currency.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div className="flex space-x-2">

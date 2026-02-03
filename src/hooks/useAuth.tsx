@@ -9,7 +9,7 @@ interface AuthContextType {
   session: Session | null;
   loading: boolean;
   profile: any;
-  signUp: (email: string, password: string, artisanName: string, businessName: string, businessAddress: string, phone: string, referralSource: string) => Promise<{ error: any }>;
+  signUp: (email: string, password: string, artisanName: string, businessName: string, businessAddress: string, phone: string, referralSource: string, currency: string) => Promise<{ error: any }>;
   signIn: (email: string, password: string) => Promise<{ error: any }>;
   signInWithPhone: (phone: string, password: string) => Promise<{ error: any }>;
   resetPassword: (email: string) => Promise<{ error: any }>;
@@ -96,7 +96,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const signUp = async (email: string, password: string, artisanName: string, businessName: string, businessAddress: string, phone: string, referralSource: string) => {
+  const signUp = async (email: string, password: string, artisanName: string, businessName: string, businessAddress: string, phone: string, referralSource: string, currency: string) => {
     const normalizedPhone = phone.replace(/\s+/g, '');
 
     // Check if phone number already exists before attempting signup
@@ -125,6 +125,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           business_address: businessAddress,
           phone: normalizedPhone,
           referral_source: referralSource,
+          currency: currency,
         }
       }
     });

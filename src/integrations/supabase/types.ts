@@ -318,6 +318,7 @@ export type Database = {
           business_address: string | null
           business_name: string | null
           created_at: string
+          currency: string
           email: string | null
           id: string
           invoice_count: number
@@ -340,6 +341,7 @@ export type Database = {
           business_address?: string | null
           business_name?: string | null
           created_at?: string
+          currency?: string
           email?: string | null
           id?: string
           invoice_count?: number
@@ -362,6 +364,7 @@ export type Database = {
           business_address?: string | null
           business_name?: string | null
           created_at?: string
+          currency?: string
           email?: string | null
           id?: string
           invoice_count?: number
