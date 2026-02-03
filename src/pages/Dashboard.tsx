@@ -241,7 +241,7 @@ const Dashboard = () => {
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-col gap-2 mt-4 w-full sm:w-auto">
+            <div className="flex flex-col gap-2 mt-4 w-full">
               <div className="flex gap-2">
                 <Button
                   className="flex-1 sm:w-auto bg-[#EAC435] text-black hover:bg-[#EAC435]/90"
@@ -262,7 +262,7 @@ const Dashboard = () => {
               </div>
               <Button
                 variant="outline"
-                className="w-full sm:w-auto bg-white text-[#2B4162] border-2 border-[#2B4162] hover:bg-[#2B4162] hover:text-white font-semibold transition-all duration-200"
+                className="w-full bg-white text-[#2B4162] border-2 border-[#2B4162] hover:bg-[#2B4162] hover:text-white font-semibold transition-all duration-200"
                 disabled={usageLimitReached}
                 onClick={() => setShowCreateReceiptDialog(true)}
               >
