@@ -83,13 +83,7 @@ const Pricing = () => {
             <nav className="hidden md:flex items-center space-x-6">
               <Link to="/" className="text-foreground hover:text-primary transition-colors font-medium">Home</Link>
               <Link to="/pricing" className="text-primary font-medium">Pricing</Link>
-              <Link to="/faq" className="text-foreground hover:text-primary transition-colors font-medium">FAQs</Link>
-              <Link to="/auth" className="text-foreground hover:text-primary transition-colors font-medium">Sign In</Link>
             </nav>
-
-            <Link to="/auth">
-              <Button size="sm">Get Started</Button>
-            </Link>
           </div>
         </div>
       </header>
