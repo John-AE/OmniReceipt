@@ -19,7 +19,7 @@ export const Logo = ({ className, size = 'md' }: LogoProps) => {
     <img 
       src="/logo.svg" 
       alt="OmniReceipts Logo" 
-      className={cn(sizeClasses[size], className)}
+      className={cn(sizeClasses[size], 'object-contain', className)}
     />
   );
 };
