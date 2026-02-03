@@ -4,90 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- 1. Stronger Title for SEO -->
-    <title>
-      OmniReceipts | Professional Invoices, Receipts, Quotation Generator App
-    </title>
+    <!-- SEO & Meta Tags: Optimized for search engines and social sharing -->
+    <title>OmniReceipts | Professional Invoices, Receipts & Quotations Generator</title>
+    <meta name="description" content="Create professional invoices, receipts, and quotations instantly. Free billing software with Nigeria PIT tax calculator. Generate, download, and share receipts in seconds." />
+    <meta name="author" content="OmniReceipts" />
+    <meta name="theme-color" content="#10b981" />
 
-    <!-- 2. Richer Description & Keywords -->
-    <meta
-      name="description"
-      content="Create professional invoices and receipts for free."
-    />
-    <meta
-      name="keywords"
-      content="invoice generator, receipt maker, OmniReceipts, quotation generator, billing software, free invoice app"
-    />
-    <meta name="author" content="OmniReceiptss" />
-
+    <!-- Preconnect to external domains for faster resource loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- Favicon -->
+    <!-- Favicon: SVG for scalability, PNG for broad compatibility -->
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/icon-192x192.png"
-      sizes="192x192"
-    />
+    <link rel="icon" type="image/png" href="/icon-192x192.png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/icon-192x192.png" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto+Condensed:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts: Deferred loading to prevent render blocking -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto+Condensed:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto+Condensed:wght@300;400;500;600;700&display=swap" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto+Condensed:wght@300;400;500;600;700&display=swap" /></noscript>
 
+    <!-- Service Worker: Defer registration until page load completes -->
     <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker.register("/sw.js");
-        });
-      }
+      (function() {
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js').catch(function(error) {
+              console.warn('Service worker registration failed:', error);
+            });
+          });
+        }
+      })();
     </script>
+
+    <!-- Analytics: Async loading to avoid blocking page render -->
     <script
       src="https://analytics.ahrefs.com/analytics.js"
       data-key="zNhZeGUBo2QmfLN4vDZwcA"
       async
+      defer
     ></script>
 
-    <!-- Open Graph (Social Sharing) - Updated for Tax Tool -->
-    <meta
-      property="og:title"
-      content="OmniReceipts | Invoices, Receipts and Quotations App"
-    />
-    <meta
-      property="og:description"
-      content="Generate professional invoices, receipts, and estimate your 2025 Personal Income Tax (PIT) instantly."
-    />
+    <!-- Open Graph: Social sharing metadata for rich previews -->
+    <meta property="og:title" content="OmniReceipts | Professional Invoices, Receipts & Quotations Generator" />
+    <meta property="og:description" content="Create professional invoices, receipts, and quotations instantly. Free billing software with Nigeria PIT tax calculator." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://123185.xyz" />
     <meta property="og:image" content="https://123185.xyz/og_image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="OmniReceipts" />
-    <meta name="theme-color" content="#10b981" />
 
+    <!-- Twitter: Card metadata for Twitter/X sharing -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="OmniReceipts | Smart Invoicing, Receipts & Quotation Tool"
-    />
-    <meta
-      name="twitter:description"
-      content="Create invoices and receipts instantly with OmniReceipts."
-    />
+    <meta name="twitter:title" content="OmniReceipts | Professional Invoices, Receipts & Quotations Generator" />
+    <meta name="twitter:description" content="Create professional invoices, receipts, and quotations instantly. Free billing software with Nigeria PIT tax calculator." />
     <meta name="twitter:image" content="https://123185.xyz/og_image.png" />
 
-    <!-- Default Canonical -->
+    <!-- Canonical: Prevents duplicate content issues in search -->
     <link rel="canonical" href="https://123185.xyz" />
 
-    <!-- Robots meta -->
-    <meta
-      name="robots"
-      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-    />
+    <!-- Robots: Search engine crawling directives -->
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Security: X-Content-Type-Options prevents MIME type sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="strict-origin-when-cross-origin" />
   </head>
 
   <body>
