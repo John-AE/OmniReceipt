@@ -65,7 +65,7 @@ OmniReceipts is a mobile-first web application designed specifically for artisan
    - Free tier: 3 documents per month
    - Monthly subscription: ₦2,000/month (unlimited)
    - Yearly subscription: ₦20,000/year (2 months free)
-   - Secure Paystack payment integration
+   - Secure payment integration (Chargebee coming soon)
 
 6. **Export & Sharing**
    - Download as JPEG images
@@ -111,7 +111,7 @@ OmniReceipts is a mobile-first web application designed specifically for artisan
 
 ### External Services
 
-- **Paystack** - Payment processing
+- **Chargebee** - Payment processing (coming soon)
 - **Brevo** - Email notifications
 - **WhatsApp API** - Document sharing
 
@@ -179,12 +179,12 @@ The project requires a Supabase backend with:
 
 3. **Edge Functions**
    - `send-email-confirmation` - Email verification
-   - `initialize-payment` - Paystack payment initialization
+   - `initialize-payment` - Payment initialization (Chargebee coming soon)
    - `verify-payment` - Payment verification and subscription updates
 
 4. **Secrets Configuration**
    - `BREVO_API_KEY` - Email service
-   - `PAYSTACK_SECRET_KEY` - Payment processing
+   - `PAYMENT_SECRET_KEY` - Payment processing (coming soon)
    - `RESEND_API_KEY` - Alternative email service
 
 See `DEVELOPER_GUIDE.md` for detailed database schema and RLS policies.
@@ -336,7 +336,7 @@ netlify deploy --prod
 Ensure these are configured in your production environment:
 
 - Supabase project URL and anon key
-- Paystack public key (frontend only)
+- Payment gateway keys (frontend only) - coming soon
 - Edge function secrets (Supabase dashboard)
 
 ### Post-Deployment Checklist
@@ -345,7 +345,7 @@ Ensure these are configured in your production environment:
 - [ ] RLS policies active
 - [ ] Storage buckets configured with correct policies
 - [ ] Edge functions deployed
-- [ ] Secrets configured (Paystack, Brevo, etc.)
+- [ ] Secrets configured (payment gateway, Brevo, etc.)
 - [ ] Custom domain connected (optional)
 - [ ] SSL certificate active
 - [ ] PWA manifest and service worker active
@@ -397,7 +397,7 @@ Copyright © 2025 OmniReceipts. All rights reserved.
 - Built with [Lovable](https://lovable.dev)
 - UI Components from [shadcn/ui](https://ui.shadcn.com)
 - Backend by [Supabase](https://supabase.com)
-- Payments by [Paystack](https://paystack.com)
+- **Payments**: Payment gateway integration coming soon
 
 ---
 

@@ -68,46 +68,11 @@ const SubscriptionDialog = ({ open, onOpenChange, currentPlan }: SubscriptionDia
   };
 
 const initiatePaystackPayment = async (planType: string, amount: number) => {
-    if (!user?.email) {
-      toast({
-        title: "Error",
-        description: "User email not found. Please try logging in again.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      // Call our secure edge function instead of making direct API calls
-      const { data, error } = await supabase.functions.invoke('initialize-payment', {
-        body: {
-          email: user.email,
-          amount: amount,
-          planType: planType
-        }
-      });
-
-      if (error) {
-        throw new Error(error.message || 'Failed to initialize payment');
-      }
-
-      if (data?.status && data?.data?.authorization_url) {
-        window.location.href = data.data.authorization_url;
-      } else {
-        throw new Error(data?.error || 'Failed to get payment URL');
-      }
-    } catch (error: any) {
-      console.error('Payment error:', error);
-      toast({
-        title: "Payment Error",
-        description: error.message || 'Failed to initialize payment',
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
+    // Paystack removed - Chargebee integration coming soon
+    toast({
+      title: "Payment Integration Coming Soon",
+      description: "We're currently updating our payment system. Please check back soon.",
+    });
   };
 
   const plans = [
@@ -250,8 +215,7 @@ const initiatePaystackPayment = async (planType: string, amount: number) => {
 
         <DialogFooter className="flex-col space-y-2">
           <p className="text-sm text-muted-foreground text-center">
-            All plans include secure payment processing via Paystack. 
-            You can change or cancel your subscription at any time.
+            All plans include secure payment processing. Payment integration coming soon.
           </p>
           <p className="text-xs text-muted-foreground text-center">
             Prices are in Naira (₦). No setup fees or hidden charges.

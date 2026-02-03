@@ -42,7 +42,7 @@ const FAQSection = () => {
     },
     {
       question: "What is the payment method?",
-      answer: "The preferred payment method is via Bank Transfer. This way, you do not need to provide any debit card or bank details. You simply send the subscription amount to the Paystack gateway account number that is provided."
+      answer: "The preferred payment method will be announced soon. Stay tuned for our new payment integration."
     },
     {
       question: "How long is a month's subscription if I subscribe in the middle of any month?",

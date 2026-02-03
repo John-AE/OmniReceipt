@@ -399,11 +399,7 @@ const Index = () => {
 
           <div className="text-center mt-12 space-y-2">
             <p className="text-sm text-muted-foreground">
-              All plans include secure payment processing via{' '}
-              <a href="https://paystack.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
-                Paystack
-              </a>.
-              You can change or cancel your subscription at any time.
+              All plans include secure payment processing. Payment integration coming soon.
             </p>
             <p className="text-xs text-muted-foreground">
               Prices are in US Dollars ($). No setup fees or hidden charges.

@@ -169,7 +169,7 @@ export type Database = {
           created_at: string
           currency: string
           id: string
-          paystack_response: Json | null
+          payment_response: Json | null
           plan_type: string
           reference: string
           status: string

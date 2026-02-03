@@ -235,7 +235,7 @@ const fetchData = async () => {
       payment_status: user.payment_verified ? 'success' : 'pending',
       subscription_expires: user.subscription_expires,
       payment_date: (user as any).last_payment_date || user.updated_at, // Use dedicated payment date field
-      gateway: 'paystack'
+      gateway: 'pending'
     }));
     
     // Transform users data to include monthly counts, revenue, referral_source and last_payment_date
