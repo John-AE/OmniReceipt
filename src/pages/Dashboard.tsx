@@ -241,23 +241,25 @@ const Dashboard = () => {
             </p>
 
             {/* Action Buttons */}
-            <div className="grid grid-cols-2 sm:flex sm:flex-row gap-2 mt-4 w-full sm:w-auto">
-              <Button
-                className="w-full sm:w-auto bg-[#EAC435] text-black hover:bg-[#EAC435]/90"
-                disabled={usageLimitReached}
-                onClick={() => !usageLimitReached && navigate('/create-quotation')}
-              >
-                <ClipboardList className="mr-2 h-4 w-4" />
-                <span className="text-sm sm:text-base">Create Quotation</span>
-              </Button>
-              <Button
-                className="w-full sm:w-auto"
-                disabled={usageLimitReached}
-                onClick={() => !usageLimitReached && navigate('/create-invoice')}
-              >
-                <Plus className="mr-2 h-4 w-4" />
-                <span className="text-sm sm:text-base">Create Invoice</span>
-              </Button>
+            <div className="flex flex-col gap-2 mt-4 w-full sm:w-auto">
+              <div className="flex gap-2">
+                <Button
+                  className="flex-1 sm:w-auto bg-[#EAC435] text-black hover:bg-[#EAC435]/90"
+                  disabled={usageLimitReached}
+                  onClick={() => !usageLimitReached && navigate('/create-quotation')}
+                >
+                  <ClipboardList className="mr-2 h-4 w-4" />
+                  <span className="text-sm sm:text-base">Create Quotation</span>
+                </Button>
+                <Button
+                  className="flex-1 sm:w-auto"
+                  disabled={usageLimitReached}
+                  onClick={() => !usageLimitReached && navigate('/create-invoice')}
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  <span className="text-sm sm:text-base">Create Invoice</span>
+                </Button>
+              </div>
               <Button
                 variant="outline"
                 className="w-full sm:w-auto bg-white text-[#2B4162] border-2 border-[#2B4162] hover:bg-[#2B4162] hover:text-white font-semibold transition-all duration-200"
