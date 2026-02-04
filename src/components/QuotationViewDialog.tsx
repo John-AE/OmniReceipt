@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Logo } from '@/components/ui/logo';
 import { MessageSquare, Loader2, Eye } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { getCurrencyLocale } from '@/utils/currencyConfig';
 import { toast } from '@/hooks/use-toast';
 import QuotationViewer from '@/components/QuotationViewer';
 import { shareJPEGViaWhatsApp } from '@/utils/fileUpload';
@@ -40,6 +41,32 @@ export const QuotationViewDialog = ({ quotation, open, onOpenChange, onStatusUpd
   const [isSending, setIsSending] = useState(false);
   const [showQuotationViewer, setShowQuotationViewer] = useState(false);
   const [quotationData, setQuotationData] = useState<QuotationData | null>(null);
+  const [userCurrency, setUserCurrency] = useState<string>('NGN');
+
+  // Fetch user currency when dialog opens
+  useEffect(() => {
+    const fetchUserCurrency = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('currency')
+            .eq('user_id', user.id)
+            .single();
+          if (profile?.currency) {
+            setUserCurrency(profile.currency);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user currency:', error);
+      }
+    };
+
+    if (open && quotation) {
+      fetchUserCurrency();
+    }
+  }, [open, quotation]);
 
   if (!quotation) return null;
   
@@ -49,9 +76,9 @@ export const QuotationViewDialog = ({ quotation, open, onOpenChange, onStatusUpd
   }
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-NG', {
+    return new Intl.NumberFormat(getCurrencyLocale(userCurrency), {
       style: 'currency',
-      currency: 'NGN',
+      currency: userCurrency,
     }).format(amount);
   };
 
@@ -251,7 +278,7 @@ export const QuotationViewDialog = ({ quotation, open, onOpenChange, onStatusUpd
               <Eye className="h-4 w-4" />
               View Quotation
             </Button>
-                       
+                        
             {quotation.status === 'created' && (
               <Button 
                 onClick={handleSendWhatsApp}
@@ -280,5 +307,3 @@ export const QuotationViewDialog = ({ quotation, open, onOpenChange, onStatusUpd
     </Dialog>
   );
 };
-
-

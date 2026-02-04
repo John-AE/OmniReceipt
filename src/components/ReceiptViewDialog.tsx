@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Logo } from '@/components/ui/logo';
 import { Eye, Share2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { getCurrencyByCode, getCurrencyLocale } from '@/utils/currencyConfig';
 import { toast } from '@/hooks/use-toast';
 import ReceiptViewer from '@/components/ReceiptViewer';
 import { shareJPEGViaWhatsApp } from '@/utils/fileUpload';
@@ -41,13 +42,40 @@ interface ReceiptViewDialogProps {
 export const ReceiptViewDialog = ({ receipt, open, onOpenChange, onStatusUpdate }: ReceiptViewDialogProps) => {
   const [showReceiptViewer, setShowReceiptViewer] = useState(false);
   const [receiptData, setReceiptData] = useState<InvoiceData | null>(null);
+  const [userCurrency, setUserCurrency] = useState<string>('NGN');
+
+  // Fetch user currency when dialog opens
+  useEffect(() => {
+    const fetchUserCurrency = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('currency')
+            .eq('user_id', user.id)
+            .single();
+          if (profile?.currency) {
+            setUserCurrency(profile.currency);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user currency:', error);
+      }
+    };
+
+    if (open && receipt) {
+      fetchUserCurrency();
+    }
+  }, [open, receipt]);
 
   if (!receipt) return null;
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-NG', {
+    const currency = getCurrencyByCode(userCurrency);
+    return new Intl.NumberFormat(getCurrencyLocale(userCurrency), {
       style: 'currency',
-      currency: 'NGN',
+      currency: userCurrency,
     }).format(amount);
   };
 
@@ -238,5 +266,3 @@ export const ReceiptViewDialog = ({ receipt, open, onOpenChange, onStatusUpdate 
     </Dialog>
   );
 };
-
-

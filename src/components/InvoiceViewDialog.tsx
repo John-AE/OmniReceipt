@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Logo } from '@/components/ui/logo';
 import { MessageSquare, Check, Loader2, Eye, Receipt, Share2, Plus } from 'lucide-react';
+import { getCurrencyByCode, getCurrencyLocale } from '@/utils/currencyConfig';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import InvoiceViewer from '@/components/InvoiceViewer';
@@ -58,6 +59,32 @@ export const InvoiceViewDialog = ({ invoice, open, onOpenChange, onStatusUpdate 
   const [invoiceData, setInvoiceData] = useState<InvoiceData | null>(null);
   const [partialPayments, setPartialPayments] = useState<PartialPayment[]>([]);
   const [currentInvoice, setCurrentInvoice] = useState<Invoice | null>(null);
+  const [userCurrency, setUserCurrency] = useState<string>('NGN');
+
+  // Fetch user currency when dialog opens
+  useEffect(() => {
+    const fetchUserCurrency = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('currency')
+            .eq('user_id', user.id)
+            .single();
+          if (profile?.currency) {
+            setUserCurrency(profile.currency);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user currency:', error);
+      }
+    };
+
+    if (open && invoice) {
+      fetchUserCurrency();
+    }
+  }, [open, invoice]);
 
   // Fetch partial payments and update current invoice when dialog opens or invoice changes
   useEffect(() => {
@@ -115,9 +142,9 @@ export const InvoiceViewDialog = ({ invoice, open, onOpenChange, onStatusUpdate 
   const hasPartialPayments = partialPayments.length > 0;
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-NG', {
+    return new Intl.NumberFormat(getCurrencyLocale(userCurrency), {
       style: 'currency',
-      currency: 'NGN',
+      currency: userCurrency,
     }).format(amount);
   };
 
