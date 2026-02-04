@@ -14,7 +14,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Users, Search, Phone, Mail, TrendingDown, TrendingUp, ArrowLeft, LogOut, ChevronLeft, ChevronRight } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
+import { getCurrencyLocale } from '@/utils/currencyConfig';
 import { useNavigate } from 'react-router-dom';
 import CreateReceiptDialog from '@/components/CreateReceiptDialog';
 
@@ -41,6 +41,29 @@ const CustomersPage = () => {
   const [itemsPerPage] = useState(100);
   const [showReceiptDialog, setShowReceiptDialog] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState<{name: string, phone: string, email?: string} | null>(null);
+  const [userCurrency, setUserCurrency] = useState<string>('NGN');
+
+  // Fetch user currency
+  useEffect(() => {
+    const fetchUserCurrency = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('currency')
+            .eq('user_id', user.id)
+            .single();
+          if (profile?.currency) {
+            setUserCurrency(profile.currency);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user currency:', error);
+      }
+    };
+    fetchUserCurrency();
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -174,9 +197,9 @@ const CustomersPage = () => {
   };
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-NG', {
+    return new Intl.NumberFormat(getCurrencyLocale(userCurrency), {
       style: 'currency',
-      currency: 'NGN',
+      currency: userCurrency,
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);

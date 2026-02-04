@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { getCurrencyByCode, getCurrencyLocale, getCurrencySymbol } from '@/utils/currencyConfig';
 import { toast } from '@/hooks/use-toast';
 
 interface AddPaymentModalProps {
@@ -28,17 +29,42 @@ export const AddPaymentModal = ({
   const [paymentDate, setPaymentDate] = useState(new Date().toISOString().split('T')[0]);
   const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [userCurrency, setUserCurrency] = useState<string>('NGN');
+
+  // Fetch user currency
+  useEffect(() => {
+    const fetchUserCurrency = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('currency')
+            .eq('user_id', user.id)
+            .single();
+          if (profile?.currency) {
+            setUserCurrency(profile.currency);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user currency:', error);
+      }
+    };
+    fetchUserCurrency();
+  }, []);
 
   const remainingBalance = invoiceAmount - amountPaid;
 
   const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-NG', {
+    return new Intl.NumberFormat(getCurrencyLocale(userCurrency), {
       style: 'currency',
-      currency: 'NGN',
+      currency: userCurrency,
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);
   };
+
+  const currencySymbol = getCurrencySymbol(userCurrency);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -122,7 +148,7 @@ export const AddPaymentModal = ({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="amount">Amount (₦)</Label>
+            <Label htmlFor="amount">Amount ({currencySymbol})</Label>
             <Input
               id="amount"
               type="number"

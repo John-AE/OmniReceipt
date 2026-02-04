@@ -14,7 +14,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Users, Search, Phone, Mail, TrendingDown, TrendingUp } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
+import { getCurrencyLocale } from '@/utils/currencyConfig';
 import { Link } from 'react-router-dom';
 
 interface Customer {
@@ -45,6 +45,29 @@ const CustomerListComponent = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<'name' | 'totalSpent' | 'lastTransaction'>('totalSpent');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [userCurrency, setUserCurrency] = useState<string>('NGN');
+
+  // Fetch user currency
+  useEffect(() => {
+    const fetchUserCurrency = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('currency')
+            .eq('user_id', user.id)
+            .single();
+          if (profile?.currency) {
+            setUserCurrency(profile.currency);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user currency:', error);
+      }
+    };
+    fetchUserCurrency();
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -182,9 +205,9 @@ const CustomerListComponent = ({
   };
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-NG', {
+    return new Intl.NumberFormat(getCurrencyLocale(userCurrency), {
       style: 'currency',
-      currency: 'NGN',
+      currency: userCurrency,
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);

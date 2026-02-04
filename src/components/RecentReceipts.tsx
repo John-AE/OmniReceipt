@@ -10,6 +10,7 @@ import { ExportCSV } from '@/components/ExportCSV';
 import { ExportXML } from '@/components/ExportXML';
 import { ReceiptViewDialog } from '@/components/ReceiptViewDialog';
 import { Eye, Receipt, Search } from 'lucide-react';
+import { getCurrencyLocale } from '@/utils/currencyConfig';
 import { toast } from '@/hooks/use-toast';
 import { generateUBLReceiptXML } from '@/utils/xmlUtils';
 
@@ -45,6 +46,29 @@ const RecentReceipts: React.FC<RecentReceiptsProps> = ({ onReceiptUpdate }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [dateFilter, setDateFilter] = useState('');
+  const [userCurrency, setUserCurrency] = useState<string>('NGN');
+
+  // Fetch user currency
+  useEffect(() => {
+    const fetchUserCurrency = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('currency')
+            .eq('user_id', user.id)
+            .single();
+          if (profile?.currency) {
+            setUserCurrency(profile.currency);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user currency:', error);
+      }
+    };
+    fetchUserCurrency();
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -111,9 +135,9 @@ const RecentReceipts: React.FC<RecentReceiptsProps> = ({ onReceiptUpdate }) => {
   };
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-NG', {
+    return new Intl.NumberFormat(getCurrencyLocale(userCurrency), {
       style: 'currency',
-      currency: 'NGN',
+      currency: userCurrency,
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
