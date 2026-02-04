@@ -199,7 +199,7 @@ const Dashboard = () => {
               <div className="flex items-center gap-2">
                 <div className="p-1 rounded bg-primary/10">
                   <div className="w-8 h-8 bg-primary rounded text-primary-foreground flex items-center justify-center font-bold text-sm">
-                    NR
+                    OR
                   </div>
                 </div>
                 <span className="text-2xl font-poppins font-extrabold tracking-tight">OmniReceipts</span>
