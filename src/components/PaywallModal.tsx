@@ -29,7 +29,7 @@ const PaywallModal = ({ open, onOpenChange }: PaywallModalProps) => {
     {
       name: 'Monthly',
       type: 'monthly',
-      price: '₦2,000',
+      price: '$5',
       period: 'per month',
       description: 'Great for small businesses',
       features: [
@@ -47,7 +47,7 @@ const PaywallModal = ({ open, onOpenChange }: PaywallModalProps) => {
     {
       name: 'Yearly',
       type: 'yearly',
-      price: '₦20,000',
+      price: '$50',
       period: 'per year',
       description: 'Best value for established businesses',
       features: [
@@ -114,7 +114,7 @@ const PaywallModal = ({ open, onOpenChange }: PaywallModalProps) => {
                   className="w-full" 
                   variant={plan.popular ? "default" : "outline"}
                   onClick={() => {
-                    const amount = plan.type === 'monthly' ? 2000 : 20000;
+                    const amount = plan.type === 'monthly' ? 5 : 50;
                     initiatePaystackPayment(plan.type, amount);
                   }}
                   disabled={loading}
@@ -131,7 +131,7 @@ const PaywallModal = ({ open, onOpenChange }: PaywallModalProps) => {
             All plans include secure payment processing. Payment integration coming soon.
           </p>
           <p className="text-xs text-muted-foreground text-center">
-            Prices are in Naira (₦). No setup fees or hidden charges.
+            Prices are in USD ($). No setup fees or hidden charges.
           </p>
         </DialogFooter>
       </DialogContent>
