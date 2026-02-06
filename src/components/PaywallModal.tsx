@@ -55,7 +55,7 @@ const PaywallModal = ({ open, onOpenChange }: PaywallModalProps) => {
         '2 months free',
         'Everything in monthly'
       ],
-      savings: '₦4,000 saved yearly'
+      savings: '$10 saved yearly'
     }
   ];
 

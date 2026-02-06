@@ -79,7 +79,7 @@ const initiatePaystackPayment = async (planType: string, amount: number) => {
     {
       name: 'Free',
       type: 'free',
-      price: '₦0',
+      price: '$0',
       period: 'forever',
       description: 'Perfect for getting started',
       features: [
@@ -125,7 +125,7 @@ const initiatePaystackPayment = async (planType: string, amount: number) => {
         'Everything in monthly'
       ],
       current: currentPlan === 'yearly',
-      savings: '₦4,000 saved yearly'
+      savings: '$10 saved yearly'
     }
   ];
 
