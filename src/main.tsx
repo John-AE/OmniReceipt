@@ -4,7 +4,7 @@ import App from './App.tsx'
 import './index.css'
 
 // Initialize PostHog for session recording and analytics
-posthog.init('phc_GSebQ9NtpPNUAxwOp8CAqULN0mKgDkmAdwDQSWsTPTk', {
+posthog.init('POSTHOG PROJECT ID', {
     api_host: 'https://us.i.posthog.com',
     person_profiles: 'identified_only',
     session_recording: {
